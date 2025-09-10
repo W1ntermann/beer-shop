@@ -1,0 +1,1049 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Пивас - Крафтове пиво та затишна атмосфера</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --yellow: #FFD700;
+            --yellow-bright: #FFEB3B;
+            --yellow-light: #FFF9C4;
+            --yellow-dark: #F57F17;
+            --graphite: #2C2C2C;
+            --graphite-dark: #1A1A1A;
+            --graphite-light: #424242;
+            --graphite-medium: #616161;
+            --light-gray: #F5F5F5;
+            --white: #FFFFFF;
+            --glass-bg: rgba(255,255,255,0.95);
+            --glass-border: rgba(44,44,44,0.1);
+            --shadow: 0 4px 20px rgba(44,44,44,0.15);
+            --shadow-strong: 0 8px 32px rgba(44,44,44,0.25);
+            --transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background: var(--white);
+            color: var(--graphite);
+            line-height: 1.6;
+            min-height: 100vh;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(circle at 20% 80%, rgba(255, 235, 59, 0.03) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(255, 215, 0, 0.02) 0%, transparent 50%),
+                linear-gradient(135deg, rgba(44, 44, 44, 0.01) 0%, rgba(255, 255, 255, 0.02) 100%);
+            pointer-events: none;
+            z-index: -1;
+        }
+        
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* Header styles */
+        header {
+            background: var(--white);
+            backdrop-filter: blur(8px);
+            box-shadow: var(--shadow);
+            border-bottom: 2px solid var(--yellow);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            transition: all var(--transition);
+        }
+        
+        header::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: linear-gradient(90deg, var(--yellow) 0%, var(--yellow-bright) 50%, var(--yellow) 100%);
+        }
+        
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 8px 14px;
+            border-radius: 14px;
+            background: var(--white);
+            border: 2px solid var(--yellow);
+            box-shadow: var(--shadow);
+            text-decoration: none;
+            transition: all var(--transition);
+        }
+        
+        .logo:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-strong);
+            border-color: var(--yellow-bright);
+        }
+            
+        .logo-badge {
+            width: 64px;
+            height: 64px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 6px;
+            background: linear-gradient(135deg, var(--yellow) 0%, var(--yellow-bright) 100%);
+            box-shadow: var(--shadow);
+            border: 2px solid var(--graphite);
+            overflow: hidden;
+            flex-shrink: 0;
+        }
+            
+
+        .logo-badge img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            border-radius: 8px;
+            filter: drop-shadow(0 4px 12px rgba(44,44,44,0.2));
+            background: var(--white);
+            padding: 6px;
+        }
+        
+        .logo-text h1 {
+            margin: 0;
+            font-size: 22px;
+            line-height: 1;
+            color: var(--graphite);
+            font-weight: 900;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+        
+        .logo-text .tag {
+            display: block;
+            margin-top: 2px;
+            font-size: 12px;
+            color: var(--graphite-medium);
+            font-weight: 600;
+            opacity: 0.9;
+        }
+
+
+@media (max-width: 480px) {
+    .logo-badge { width:50px; height:50px; padding:5px; border-radius:10px; }
+    .logo-text h1 { font-size:16px; }
+    .logo-text .tag { font-size:11px; }
+}
+        
+        
+        
+        .nav-menu {
+            display: flex;
+            list-style: none;
+        }
+        
+        .nav-menu li {
+            margin-left: 25px;
+        }
+        
+        .nav-menu a {
+            color: var(--graphite);
+            font-weight: 600;
+            font-size: 16px;
+            padding: 12px 16px;
+            letter-spacing: 0.5px;
+            transition: all var(--transition);
+            position: relative;
+            text-decoration: none;
+            border-radius: 8px;
+        }
+        
+        .nav-menu a:after {
+            background: var(--yellow);
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: 8px;
+            left: 50%;
+            transform: translateX(-50%);
+            transition: width 0.3s;
+            border-radius: 1px;
+        }
+        
+        .nav-menu a:hover {
+            color: var(--yellow-dark);
+            background: rgba(255, 235, 59, 0.1);
+        }
+        
+        .nav-menu a:hover:after {
+            width: 80%;
+        }
+        
+        /* Hero section */
+        .hero {
+            background: linear-gradient(135deg, var(--graphite-dark) 0%, var(--graphite) 50%, var(--graphite-light) 100%);
+            color: var(--white);
+            text-align: center;
+            padding: 140px 20px 120px 20px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: 
+                radial-gradient(circle at 20% 20%, rgba(255, 235, 59, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(255, 215, 0, 0.08) 0%, transparent 50%);
+            z-index: 0;
+        }
+        
+        .hero::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, var(--yellow) 0%, var(--yellow-bright) 50%, var(--yellow) 100%);
+            z-index: 1;
+        }
+        
+        .hero h1 {
+            font-size: 60px;
+            margin-bottom: 24px;
+            color: var(--yellow-bright);
+            text-shadow: 0 4px 20px rgba(44,44,44,0.5);
+            position: relative;
+            z-index: 1;
+            letter-spacing: 3px;
+            animation: fadeInDown 1s;
+            font-weight: 900;
+        }
+        
+        .hero p {
+            font-size: 22px;
+            max-width: 800px;
+            margin: 0 auto 36px;
+            font-weight: 400;
+            position: relative;
+            z-index: 1;
+            animation: fadeInUp 1.2s;
+            color: rgba(255, 255, 255, 0.9);
+            line-height: 1.6;
+        }
+        
+        @keyframes fadeInDown {
+            from { opacity: 0; transform: translateY(-40px);}
+            to { opacity: 1; transform: translateY(0);}
+        }
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(40px);}
+            to { opacity: 1; transform: translateY(0);}
+        }
+        
+        .btn {
+            display: inline-block;
+            background: var(--yellow);
+            color: var(--graphite);
+            padding: 16px 40px;
+            border-radius: 8px;
+            font-size: 18px;
+            font-weight: 700;
+            border: 2px solid var(--yellow);
+            box-shadow: var(--shadow);
+            cursor: pointer;
+            text-decoration: none;
+            transition: all var(--transition);
+            position: relative;
+            z-index: 1;
+            letter-spacing: 0.5px;
+        }
+        
+        .btn:hover {
+            background: var(--graphite);
+            color: var(--yellow);
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-strong);
+            border-color: var(--graphite);
+        }
+        
+        /* Section styles */
+        section {
+            padding: 90px 0 70px 0;
+            position: relative;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 50px;
+            color: var(--graphite);
+            position: relative;
+        }
+        
+        .section-title h2 {
+            font-size: 40px;
+            display: inline-block;
+            padding: 20px 30px;
+            background: var(--white);
+            border-radius: 12px;
+            box-shadow: var(--shadow);
+            color: var(--graphite);
+            position: relative;
+            z-index: 1;
+            letter-spacing: 1px;
+            border: 2px solid var(--yellow);
+            font-weight: 800;
+        }
+        
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 4px;
+            background: var(--yellow);
+            border-radius: 2px;
+        }
+        
+        /* Stores section */
+        .stores-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 36px;
+        }
+        
+        .store-card {
+            background: var(--white);
+            border-radius: 16px;
+            box-shadow: var(--shadow);
+            border: 2px solid var(--light-gray);
+            overflow: hidden;
+            transition: all var(--transition);
+            position: relative;
+        }
+        
+        .store-card:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-strong);
+            border-color: var(--yellow);
+        }
+        
+        .store-img {
+            height: 210px;
+            position: relative;
+            overflow: hidden;
+            border-radius: 14px 14px 0 0;
+        }
+        
+        .store-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform var(--transition);
+        }
+        
+        .store-card:hover .store-img img {
+            transform: scale(1.05);
+        }
+        
+        .store-info {
+            padding: 28px 24px;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .store-info h3 {
+            color: var(--graphite);
+            margin-bottom: 16px;
+            font-size: 22px;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+        }
+        
+        .store-info p {
+            color: var(--graphite-medium);
+            font-size: 16px;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+        }
+        
+        .store-info i {
+            margin-right: 12px;
+            color: var(--yellow);
+            width: 20px;
+            font-size: 16px;
+        }
+        
+        /* Products section */
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 36px;
+        }
+        
+        .product-card {
+            background: var(--white);
+            border-radius: 16px;
+            box-shadow: var(--shadow);
+            border: 2px solid var(--light-gray);
+            overflow: hidden;
+            transition: all var(--transition);
+            position: relative;
+        }
+        
+        .product-card:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-strong);
+            border-color: var(--yellow);
+        }
+        
+        .product-img {
+            height: 210px;
+            position: relative;
+            overflow: hidden;
+            border-radius: 14px 14px 0 0;
+        }
+        
+        .product-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform var(--transition);
+        }
+        
+        .product-card:hover .product-img img {
+            transform: scale(1.05);
+        }
+        
+        .product-info {
+            padding: 28px 24px;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .product-info h3 {
+            color: var(--graphite);
+            margin-bottom: 8px;
+            font-size: 20px;
+            font-weight: 700;
+        }
+        
+        .product-info p {
+            color: var(--graphite-medium);
+            font-size: 14px;
+            margin-bottom: 12px;
+            line-height: 1.4;
+        }
+        
+        .price {
+            background: var(--yellow);
+            color: var(--graphite);
+            padding: 8px 16px;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 700;
+            display: inline-block;
+            box-shadow: var(--shadow);
+            border: 1px solid var(--yellow-dark);
+        }
+        
+        /* Franchise section */
+        .franchise {
+            background: linear-gradient(135deg, var(--graphite-dark) 0%, var(--graphite) 50%, var(--graphite-light) 100%);
+            color: var(--white);
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .franchise::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: 
+                radial-gradient(circle at 30% 30%, rgba(255, 235, 59, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 70% 70%, rgba(255, 215, 0, 0.08) 0%, transparent 50%);
+            z-index: 0;
+        }
+        
+        .franchise .section-title h2 {
+            background: var(--white);
+            color: var(--graphite);
+            border-color: var(--yellow);
+        }
+        
+        .franchise-content {
+            max-width: 800px;
+            margin: 0 auto;
+            background: var(--white);
+            border-radius: 16px;
+            padding: 40px 30px;
+            box-shadow: var(--shadow-strong);
+            border: 2px solid var(--yellow);
+            position: relative;
+            z-index: 1;
+        }
+        
+        .franchise-content p {
+            margin-bottom: 20px;
+            font-size: 18px;
+            color: var(--graphite);
+            line-height: 1.6;
+        }
+        
+        .phone-number {
+            background: var(--yellow);
+            color: var(--graphite);
+            padding: 18px 44px;
+            border-radius: 8px;
+            font-size: 24px;
+            font-weight: 700;
+            margin-top: 28px;
+            text-decoration: none;
+            transition: all var(--transition);
+            box-shadow: var(--shadow);
+            border: 2px solid var(--yellow);
+            display: inline-block;
+            letter-spacing: 0.5px;
+        }
+        
+        .phone-number:hover {
+            background: var(--graphite);
+            color: var(--yellow);
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-strong);
+            border-color: var(--graphite);
+        }
+        
+        /* Delivery section */
+        .delivery-content {
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto;
+            background: var(--white);
+            border-radius: 16px;
+            padding: 40px 30px;
+            box-shadow: var(--shadow);
+            border: 2px solid var(--light-gray);
+        }
+        
+        .delivery-content p {
+            font-size: 18px;
+            margin-bottom: 20px;
+            color: var(--graphite);
+            line-height: 1.6;
+        }
+        
+        .bond-logo {
+            display: inline-block;
+            background: var(--graphite);
+            color: var(--yellow);
+            padding: 16px 32px;
+            border-radius: 8px;
+            font-weight: 700;
+            font-size: 24px;
+            margin-top: 20px;
+            letter-spacing: 1px;
+            box-shadow: var(--shadow);
+            border: 2px solid var(--yellow);
+        }
+        
+        /* Footer */
+        footer {
+            background: linear-gradient(135deg, var(--graphite-dark) 0%, var(--graphite) 50%, var(--graphite-light) 100%);
+            color: var(--white);
+            padding: 70px 0 24px;
+            border-top: 4px solid var(--yellow);
+            position: relative;
+        }
+        
+        footer::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(circle at 20% 20%, rgba(255, 235, 59, 0.05) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(255, 215, 0, 0.03) 0%, transparent 50%);
+            pointer-events: none;
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 48px;
+            margin-bottom: 40px;
+        }
+        
+        .footer-section h3 {
+            color: var(--yellow);
+            margin-bottom: 22px;
+            font-size: 24px;
+            letter-spacing: 1px;
+            padding-bottom: 12px;
+        }
+        
+        .footer-section h3:after {
+            width: 60px;
+            height: 3px;
+            background: linear-gradient(90deg, var(--yellow), var(--yellow-dark));
+        }
+        
+        .footer-section p {
+            margin-bottom: 12px;
+            opacity: 0.85;
+            font-size: 17px;
+        }
+        
+        .social-icons {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+        
+        .social-link {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px 16px;
+            background: rgba(255,255,255,0.08);
+            border-radius: 12px;
+            color: white;
+            text-decoration: none;
+            transition: all var(--transition);
+            border: 1px solid rgba(255,255,255,0.1);
+            backdrop-filter: blur(8px);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .social-link::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
+            transition: left 0.6s;
+        }
+        
+        .social-link:hover::before {
+            left: 100%;
+        }
+        
+        .social-link i {
+            font-size: 20px;
+            width: 24px;
+            text-align: center;
+            transition: transform var(--transition);
+        }
+        
+        .social-link span {
+            font-size: 14px;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+        }
+        
+        .social-link:hover {
+            transform: translateX(8px) scale(1.02);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.2);
+        }
+        
+        .social-link:hover i {
+            transform: scale(1.2);
+        }
+        
+        /* Individual social network colors */
+        .social-link.instagram:hover {
+            background: linear-gradient(45deg, #f09433 0%,#e6683c 25%,#dc2743 50%,#cc2366 75%,#bc1888 100%);
+            border-color: #bc1888;
+        }
+        
+        .social-link.facebook:hover {
+            background: #1877f2;
+            border-color: #1877f2;
+        }
+        
+        .social-link.telegram:hover {
+            background: #0088cc;
+            border-color: #0088cc;
+        }
+        
+        .social-link.whatsapp:hover {
+            background: #25d366;
+            border-color: #25d366;
+        }
+        
+        .copyright {
+            text-align: center;
+            padding-top: 32px;
+            border-top: 1.5px solid #555;
+            font-size: 15px;
+            opacity: 0.8;
+            letter-spacing: 1px;
+        }
+        
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .hero h1 { font-size: 44px; }
+            .section-title h2 { font-size: 30px; }
+        }
+        @media (max-width: 768px) {
+            .nav-menu { display: none; }
+            .hero h1 { font-size: 32px; }
+            .hero p { font-size: 17px; }
+            .section-title h2 { font-size: 22px; }
+            .phone-number { font-size: 18px; padding: 12px 18px; }
+            .footer-content { grid-template-columns: 1fr; gap: 24px; }
+            section { padding: 60px 0 40px 0; }
+            .store-img, .product-img { height: 120px; }
+            .social-icons { flex-direction: row; flex-wrap: wrap; gap: 12px; }
+            .social-link { flex: 1; min-width: 140px; justify-content: center; }
+            .social-link span { display: none; }
+            .social-link i { font-size: 18px; }
+        }
+        @media (max-width: 480px) {
+            .logo { font-size: 22px; padding: 8px 10px; }
+            .hero { padding: 60px 10px 40px 10px; }
+            .section-title h2 { font-size: 16px; }
+            .btn, .phone-number { font-size: 14px; padding: 8px 14px; }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container header-container">
+        <a href="#" class="logo" aria-label="Пивас — головна">
+            <span class="logo-badge">
+                <!-- Поставте сюди вашу оригінальну картинку -->
+                <img src="afeab7fa-4c38-4d81-84d5-405b8cf196d2.jpg" alt="ПИВАС логотип">
+            </span>
+            <span class="logo-text">
+                <h1>ПИВАС</h1>
+                <span class="tag">МАГАЗИН РАЗЛИВНОГО ПИВА</span>
+            </span>
+        </a>
+        <ul class="nav-menu">
+            <li><a href="#main">Головна</a></li>
+            <li><a href="#stores">Магазини</a></li>
+            <li><a href="#beer">Пиво</a></li>
+            <li><a href="#drinks">Напої</a></li>
+            <li><a href="#snacks">Закуски</a></li>
+            <li><a href="#franchise">Франшиза</a></li>
+            <li><a href="#delivery">Доставка</a></li>
+        </ul>
+    </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="main" class="hero">
+        <div class="container">
+            <h1>ПИВАС</h1>
+            <p>У нас можливо переглянути топ футбол, бокс та інші спортивні заходи. Насолодиться затишною атмосферою у кафе за цінами магазину розливного пива, зустрінеться з друзями та відзначити всіляки заходи</p>
+            <a href="#stores" class="btn">Наші магазини</a>
+        </div>
+    </section>
+
+    <!-- Stores Section -->
+    <section id="stores">
+        <div class="container">
+            <div class="section-title">
+                <h2>Наші магазини</h2>
+            </div>
+            <div class="stores-grid">
+                <div class="store-card">
+                    <div class="store-img">
+                        <img src="stovbova.jpg" alt="Магазин на вул. Стовбова, 27">
+                    </div>
+                    <div class="store-info">
+                        <h3>Магазин #1</h3>
+                        <p><i class="fas fa-map-marker-alt"></i> Вул. Стовбова, 27</p>
+                        <p><i class="fas fa-phone"></i> 066 025 6694</p>
+                    </div>
+                </div>
+                
+                <div class="store-card">
+                    <div class="store-img">
+                        <img src="radisna.jpg" alt="Магазин на вул. Радісна 23а">
+                    </div>
+                    <div class="store-info">
+                        <h3>Магазин #2</h3>
+                        <p><i class="fas fa-map-marker-alt"></i> Вул. Радісна 23а</p>
+                        <p><i class="fas fa-phone"></i> 066 883 4443</p>
+                    </div>
+                </div>
+                
+                <div class="store-card">
+                    <div class="store-img">
+                        <img src="lyp-60.jpg" alt="Магазин на вул. Лип Івана та Юрія, 60/1">
+                    </div>
+                    <div class="store-info">
+                        <h3>Магазин #3</h3>
+                        <p><i class="fas fa-map-marker-alt"></i> Вул. Лип Івана та Юрія, 60/1</p>
+                        <p><i class="fas fa-phone"></i> 099 463 3694</p>
+                    </div>
+                </div>
+                
+                <div class="store-card">
+                    <div class="store-img">
+                        <img src="lyp-5.jpg" alt="Магазин на вул. Лип Івана та Юрія, 5/1">
+                    </div>
+                    <div class="store-info">
+                        <h3>Магазин #4</h3>
+                        <p><i class="fas fa-map-marker-alt"></i> Вул. Лип Івана та Юрія, 5/1</p>
+                        <p><i class="fas fa-phone"></i> 066 010 6819</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Beer Section -->
+    <section id="beer" style="background-color: var(--light-gray);">
+        <div class="container">
+            <div class="section-title">
+                <h2>Наше пиво</h2>
+            </div>
+            <div class="products-grid">
+                <div class="product-card">
+                    <div class="product-img">
+                        <img src="https://images.unsplash.com/photo-1608270586620-248524c67de9?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Світле пиво">
+                    </div>
+                    <div class="product-info">
+                        <h3>Світле пиво</h3>
+                        <p>Освіжаюче світле пиво з м'яким смаком та легким ароматом</p>
+                        <div class="price">від 25 грн/л</div>
+                    </div>
+                </div>
+                
+                <div class="product-card">
+                    <div class="product-img">
+                        <img src="https://images.unsplash.com/photo-1513475382585-d06e58bcb0e0?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Темне пиво">
+                    </div>
+                    <div class="product-info">
+                        <h3>Темне пиво</h3>
+                        <p>Насичене темне пиво з багатим смаком та карамельними нотами</p>
+                        <div class="price">від 30 грн/л</div>
+                    </div>
+                </div>
+                
+                <div class="product-card">
+                    <div class="product-img">
+                        <img src="https://images.unsplash.com/photo-1558642452-9d2a7deb7f62?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Крафтове пиво">
+                    </div>
+                    <div class="product-info">
+                        <h3>Крафтове пиво</h3>
+                        <p>Унікальні сорти крафтового пива з ексклюзивними рецептурами</p>
+                        <div class="price">від 45 грн/л</div>
+                    </div>
+                </div>
+                
+                <div class="product-card">
+                    <div class="product-img">
+                        <img src="https://images.unsplash.com/photo-1571613316887-6f8d5cbf7ef7?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Пшеничне пиво">
+                    </div>
+                    <div class="product-info">
+                        <h3>Пшеничне пиво</h3>
+                        <p>Свіже пшеничне пиво з фруктовими нотами та м'якою піною</p>
+                        <div class="price">від 28 грн/л</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Drinks Section -->
+    <section id="drinks">
+        <div class="container">
+            <div class="section-title">
+                <h2>Інші напої</h2>
+            </div>
+            <div class="products-grid">
+                <div class="product-card">
+                    <div class="product-img">
+                        <img src="https://images.unsplash.com/photo-1506377247377-2a5b3b417ebb?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Вино">
+                    </div>
+                    <div class="product-info">
+                        <h3>Вино</h3>
+                        <p>Червоне та біле вино різних сортів з усього світу</p>
+                        <div class="price">від 80 грн/л</div>
+                    </div>
+                </div>
+                
+                <div class="product-card">
+                    <div class="product-img">
+                        <img src="https://images.unsplash.com/photo-1571934811356-5cc061b6821f?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Сидр">
+                    </div>
+                    <div class="product-info">
+                        <h3>Сидр</h3>
+                        <p>Освіжаючий яблучний та грушевий сидр з натуральних фруктів</p>
+                        <div class="price">від 35 грн/л</div>
+                    </div>
+                </div>
+                
+                <div class="product-card">
+                    <div class="product-img">
+                        <img src="https://images.unsplash.com/photo-1544145945-f90425340c7e?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Безалкогольні напої">
+                    </div>
+                    <div class="product-info">
+                        <h3>Безалкогольні напої</h3>
+                        <p>Лимонад, квас, соки та інші освіжаючі напої</p>
+                        <div class="price">від 15 грн/л</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Snacks Section -->
+    <section id="snacks" style="background-color: var(--light-gray);">
+        <div class="container">
+            <div class="section-title">
+                <h2>Закуски</h2>
+            </div>
+            <div class="products-grid">
+                <div class="product-card">
+                    <div class="product-img">
+                        <img src="https://images.unsplash.com/photo-1566478989037-eec170784d0b?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Чипси та снеки">
+                    </div>
+                    <div class="product-info">
+                        <h3>Чипси та снеки</h3>
+                        <p>Різноманітні чипси, сухарики та інші хрусткі снеки</p>
+                        <div class="price">від 20 грн</div>
+                    </div>
+                </div>
+                
+                <div class="product-card">
+                    <div class="product-img">
+                        <img src="https://images.unsplash.com/photo-1529692236671-f1f6cf9683ba?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="М'ясні страви">
+                    </div>
+                    <div class="product-info">
+                        <h3>М'ясні страви</h3>
+                        <p>Ковбаси, сир, м'ясні нарізки та ароматні копченості</p>
+                        <div class="price">від 50 грн</div>
+                    </div>
+                </div>
+                
+                <div class="product-card">
+                    <div class="product-img">
+                        <img src="https://images.unsplash.com/photo-1486297678162-eb2a19b0a32d?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Сирна тарілка">
+                    </div>
+                    <div class="product-info">
+                        <h3>Сирна тарілка</h3>
+                        <p>Асорті з різних сортів сиру та свіжих фруктів</p>
+                        <div class="price">від 80 грн</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Franchise Section -->
+    <section id="franchise" class="franchise">
+        <div class="container">
+            <div class="section-title">
+                <h2>Франшиза</h2>
+            </div>
+            <div class="franchise-content">
+                <p>Швидке відкриття, ціни нижче ринкових, багато бонусів, супровід</p>
+                <p>З усіх питань звертайтесь:</p>
+                <a href="tel:0979646415" class="phone-number">097 964 6415</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Delivery Section -->
+    <section id="delivery">
+        <div class="container">
+            <div class="section-title">
+                <h2>Доставка</h2>
+            </div>
+            <div class="delivery-content">
+                <p>Ми пропонуємо доставку за допомогою сервісу</p>
+                <div class="bond-logo">BOND</div>
+                <p>Замовляйте ваші улюблені напої та закуски прямо додому!</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>ПИВАС</h3>
+                    <p>Найкраще пиво та затишна атмосфера. Заходьте до нас щодня з 10:00 до 22:00.</p>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Контакти</h3>
+                    <p><i class="fas fa-envelope"></i> Email: info@pivas.ua</p>
+                    <p><i class="fas fa-phone"></i> Телефон: 0800 123 456</p>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Соціальні мережі</h3>
+                    <div class="social-icons">
+                        <a href="https://instagram.com/pivas_shop" target="_blank" class="social-link instagram">
+                            <i class="fab fa-instagram"></i>
+                            <span>Instagram</span>
+                        </a>
+                        <a href="https://facebook.com/pivas.shop" target="_blank" class="social-link facebook">
+                            <i class="fab fa-facebook-f"></i>
+                            <span>Facebook</span>
+                        </a>
+                        <a href="https://t.me/pivas_shop" target="_blank" class="social-link telegram">
+                            <i class="fab fa-telegram-plane"></i>
+                            <span>Telegram</span>
+                        </a>
+                        <a href="https://wa.me/380979646415" target="_blank" class="social-link whatsapp">
+                            <i class="fab fa-whatsapp"></i>
+                            <span>WhatsApp</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="copyright">
+                <p>&copy; 2023 ПИВАС. Всі права захищені.</p>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
