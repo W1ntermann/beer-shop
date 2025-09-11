@@ -933,47 +933,26 @@
         header .container {
             padding-left: 6px;
         }
-        /* Beer slider */
-        .beer-slider {
-            position: relative;
-            overflow: hidden;
-            border-radius: 16px;
-        }
-        .beer-track {
-            display: flex;
-            transition: transform 0.4s ease;
-            will-change: transform;
-        }
-        .beer-slide {
-            min-width: 100%;
-            padding: 0 0 10px 0;
-        }
-        .beer-slide .product-card { margin: 0 0 0 0; }
-        .beer-nav {
-            position: absolute;
-            inset: 0 0 0 0;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            pointer-events: none;
-        }
-        .beer-btn {
-            pointer-events: auto;
-            width: 44px;
-            height: 44px;
-            margin: auto 8px;
-            border-radius: 50%;
-            border: 2px solid var(--yellow);
-            background: rgba(26,26,26,0.7);
-            color: var(--yellow);
-            display: grid; place-items: center;
-            cursor: pointer;
-            transition: transform .2s, background .2s;
-        }
-        .beer-btn:hover { transform: scale(1.05); background: rgba(26,26,26,0.9); }
-        .beer-dots { display:flex; gap:8px; justify-content:center; margin-top:12px; }
-        .beer-dot { width:10px; height:10px; border-radius:50%; background:#7a6; background: rgba(255,215,0,0.35); border:1px solid var(--yellow); cursor:pointer; }
+        /* Beer slider - enhanced */
+        .beer-slider { position: relative; overflow: hidden; border-radius: 20px; box-shadow: 0 12px 36px rgba(0,0,0,0.28); }
+        .beer-track { display: flex; transition: transform 600ms cubic-bezier(.22,.61,.36,1); will-change: transform; }
+        .beer-slide { min-width: 100%; position: relative; }
+        .beer-slide .product-card { margin: 0; background: var(--yellow); border: 0; border-radius: 20px; }
+        .beer-slide .product-img { height: 320px; }
+        .beer-slide .product-img img { transform: scale(1.02); transition: transform 800ms ease, filter 800ms ease; }
+        .beer-slide.active .product-img img { transform: scale(1.08); filter: saturate(1.1); }
+        .beer-gradient { position:absolute; inset:0; background: linear-gradient(180deg, rgba(0,0,0,0.0) 55%, rgba(26,26,26,0.35) 100%); pointer-events:none; border-radius: 20px; }
+        .beer-nav { position: absolute; inset: 0; display: flex; justify-content: space-between; align-items: center; pointer-events:none; padding: 0 8px; }
+        .beer-btn { pointer-events: auto; width: 46px; height: 46px; border-radius: 50%; border: 2px solid var(--yellow); background: rgba(26,26,26,0.55); color: var(--yellow); display:grid; place-items:center; cursor:pointer; backdrop-filter: blur(6px); transition: transform .2s, background .2s, box-shadow .2s; box-shadow: 0 6px 18px rgba(0,0,0,0.25); }
+        .beer-btn:hover { transform: scale(1.07); background: rgba(26,26,26,0.8); }
+        .beer-dots { display:flex; gap:10px; justify-content:center; margin-top:14px; }
+        .beer-dot { width: 12px; height: 12px; border-radius: 50%; background: rgba(255,215,0,0.35); border:1.5px solid var(--yellow); cursor:pointer; transition: transform .2s, background .2s; }
+        .beer-dot:hover { transform: scale(1.15); }
         .beer-dot.active { background: var(--yellow); }
+        @media (max-width: 768px) {
+            .beer-slide .product-img { height: 220px; }
+            .beer-btn { width: 40px; height: 40px; }
+        }
     </style>
     <script>
         document.addEventListener('DOMContentLoaded', function() {
@@ -1000,28 +979,69 @@
             const dotsWrap = document.getElementById('beerDots');
             if (track && slides.length) {
                 let index = 0;
+                let autoplay; const AUTOPLAY_MS = 3500;
+                const setActive = () => {
+                    slides.forEach((s,i)=> s.classList.toggle('active', i===index));
+                    dotsWrap.querySelectorAll('.beer-dot').forEach((d,i)=> d.classList.toggle('active', i===index));
+                };
                 const update = () => {
                     track.style.transform = `translateX(-${index * 100}%)`;
-                    dotsWrap.querySelectorAll('.beer-dot').forEach((d, i)=>{
-                        d.classList.toggle('active', i === index);
-                    });
+                    setActive();
                 };
-                // dots
                 slides.forEach((_, i)=>{
                     const dot = document.createElement('button');
                     dot.className = 'beer-dot' + (i===0?' active':'');
-                    dot.addEventListener('click', ()=>{ index = i; update(); });
+                    dot.addEventListener('click', ()=>{ index = i; update(); restart(); });
                     dotsWrap.appendChild(dot);
                 });
                 const goPrev = () => { index = (index - 1 + slides.length) % slides.length; update(); };
                 const goNext = () => { index = (index + 1) % slides.length; update(); };
-                prev && prev.addEventListener('click', goPrev);
-                next && next.addEventListener('click', goNext);
-                // swipe
+                prev && prev.addEventListener('click', ()=>{ goPrev(); restart(); });
+                next && next.addEventListener('click', ()=>{ goNext(); restart(); });
                 let startX = 0; let dx = 0; let dragging = false;
-                track.addEventListener('touchstart', (e)=>{ dragging = true; startX = e.touches[0].clientX; }, {passive:true});
+                track.addEventListener('touchstart', (e)=>{ dragging = true; startX = e.touches[0].clientX; pause(); }, {passive:true});
                 track.addEventListener('touchmove', (e)=>{ if(!dragging) return; dx = e.touches[0].clientX - startX; }, {passive:true});
-                track.addEventListener('touchend', ()=>{ if(Math.abs(dx)>50){ dx>0?goPrev():goNext(); } dragging=false; dx=0; });
+                track.addEventListener('touchend', ()=>{ if(Math.abs(dx)>50){ dx>0?goPrev():goNext(); } dragging=false; dx=0; restart(); });
+                const pause = ()=> clearInterval(autoplay);
+                const start = ()=> autoplay = setInterval(goNext, AUTOPLAY_MS);
+                const restart = ()=> { pause(); start(); };
+                const slider = document.querySelector('.beer-slider');
+                slider.addEventListener('mouseenter', pause);
+                slider.addEventListener('mouseleave', start);
+                start(); setActive();
+            }
+
+            // Stores slider (reuse logic)
+            const storesTrack = document.querySelector('.stores-track');
+            const storesSlides = Array.from(document.querySelectorAll('.stores-slider .beer-slide'));
+            const storesPrev = document.getElementById('storesPrev');
+            const storesNext = document.getElementById('storesNext');
+            const storesDots = document.getElementById('storesDots');
+            if (storesTrack && storesSlides.length) {
+                let sIndex = 0;
+                let sAutoplay; const S_MS = 4000;
+                const sSetActive = () => {
+                    storesSlides.forEach((s,i)=> s.classList.toggle('active', i===sIndex));
+                    storesDots.querySelectorAll('.beer-dot').forEach((d,i)=> d.classList.toggle('active', i===sIndex));
+                };
+                const sUpdate = ()=>{ storesTrack.style.transform = `translateX(-${sIndex*100}%)`; sSetActive(); };
+                storesSlides.forEach((_, i)=>{
+                    const dot = document.createElement('button');
+                    dot.className = 'beer-dot' + (i===0?' active':'');
+                    dot.addEventListener('click', ()=>{ sIndex = i; sUpdate(); sRestart(); });
+                    storesDots.appendChild(dot);
+                });
+                const sPrev = ()=>{ sIndex = (sIndex - 1 + storesSlides.length) % storesSlides.length; sUpdate(); };
+                const sNext = ()=>{ sIndex = (sIndex + 1) % storesSlides.length; sUpdate(); };
+                storesPrev && storesPrev.addEventListener('click', ()=>{ sPrev(); sRestart(); });
+                storesNext && storesNext.addEventListener('click', ()=>{ sNext(); sRestart(); });
+                const sPause = ()=> clearInterval(sAutoplay);
+                const sStart = ()=> sAutoplay = setInterval(sNext, S_MS);
+                const sRestart = ()=> { sPause(); sStart(); };
+                const sSlider = document.querySelector('.stores-slider');
+                sSlider.addEventListener('mouseenter', sPause);
+                sSlider.addEventListener('mouseleave', sStart);
+                sStart(); sSetActive();
             }
         });
     </script>
@@ -1067,51 +1087,63 @@
             <div class="section-title">
                 <h2>Наші магазини</h2>
             </div>
-            <div class="stores-grid">
-                <div class="store-card">
-                    <div class="store-img">
-                        <img src="stovbova.jpg" alt="Магазин на вул. Стовбова, 27">
+            <div class="beer-slider stores-slider">
+                <div class="beer-track stores-track">
+                    <div class="beer-slide">
+                        <div class="store-card">
+                            <div class="store-img">
+                                <img src="stovbova.jpg" alt="Магазин на вул. Стовбова, 27">
+                            </div>
+                            <div class="store-info">
+                                <h3>Магазин #1</h3>
+                                <p><i class="fas fa-map-marker-alt"></i> Вул. Стовбова, 27</p>
+                                <p><i class="fas fa-phone"></i> 066 025 6694</p>
+                            </div>
+                        </div>
                     </div>
-                    <div class="store-info">
-                        <h3>Магазин #1</h3>
-                        <p><i class="fas fa-map-marker-alt"></i> Вул. Стовбова, 27</p>
-                        <p><i class="fas fa-phone"></i> 066 025 6694</p>
+                    <div class="beer-slide">
+                        <div class="store-card">
+                            <div class="store-img">
+                                <img src="radisna.jpg" alt="Магазин на вул. Радісна 23а">
+                            </div>
+                            <div class="store-info">
+                                <h3>Магазин #2</h3>
+                                <p><i class="fas fa-map-marker-alt"></i> Вул. Радісна 23а</p>
+                                <p><i class="fas fa-phone"></i> 066 883 4443</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="beer-slide">
+                        <div class="store-card">
+                            <div class="store-img">
+                                <img src="lyp-60.jpg" alt="Магазин на вул. Лип Івана та Юрія, 60/1">
+                            </div>
+                            <div class="store-info">
+                                <h3>Магазин #3</h3>
+                                <p><i class="fas fa-map-marker-alt"></i> Вул. Лип Івана та Юрія, 60/1</p>
+                                <p><i class="fas fa-phone"></i> 099 463 3694</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="beer-slide">
+                        <div class="store-card">
+                            <div class="store-img">
+                                <img src="lyp-5.jpg" alt="Магазин на вул. Лип Івана та Юрія, 5/1">
+                            </div>
+                            <div class="store-info">
+                                <h3>Магазин #4</h3>
+                                <p><i class="fas fa-map-marker-alt"></i> Вул. Лип Івана та Юрія, 5/1</p>
+                                <p><i class="fas fa-phone"></i> 066 010 6819</p>
+                            </div>
+                        </div>
                     </div>
                 </div>
-                
-                <div class="store-card">
-                    <div class="store-img">
-                        <img src="radisna.jpg" alt="Магазин на вул. Радісна 23а">
-                    </div>
-                    <div class="store-info">
-                        <h3>Магазин #2</h3>
-                        <p><i class="fas fa-map-marker-alt"></i> Вул. Радісна 23а</p>
-                        <p><i class="fas fa-phone"></i> 066 883 4443</p>
-                    </div>
-                </div>
-                
-                <div class="store-card">
-                    <div class="store-img">
-                        <img src="lyp-60.jpg" alt="Магазин на вул. Лип Івана та Юрія, 60/1">
-                    </div>
-                    <div class="store-info">
-                        <h3>Магазин #3</h3>
-                        <p><i class="fas fa-map-marker-alt"></i> Вул. Лип Івана та Юрія, 60/1</p>
-                        <p><i class="fas fa-phone"></i> 099 463 3694</p>
-                    </div>
-                </div>
-                
-                <div class="store-card">
-                    <div class="store-img">
-                        <img src="lyp-5.jpg" alt="Магазин на вул. Лип Івана та Юрія, 5/1">
-                    </div>
-                    <div class="store-info">
-                        <h3>Магазин #4</h3>
-                        <p><i class="fas fa-map-marker-alt"></i> Вул. Лип Івана та Юрія, 5/1</p>
-                        <p><i class="fas fa-phone"></i> 066 010 6819</p>
-                    </div>
+                <div class="beer-nav">
+                    <button class="beer-btn" id="storesPrev" aria-label="Попередній">‹</button>
+                    <button class="beer-btn" id="storesNext" aria-label="Наступний">›</button>
                 </div>
             </div>
+            <div class="beer-dots" id="storesDots"></div>
         </div>
     </section>
 
