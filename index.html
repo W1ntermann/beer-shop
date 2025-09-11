@@ -971,77 +971,69 @@
                 });
             });
 
-            // Beer slider logic
-            const track = document.querySelector('.beer-track');
-            const slides = Array.from(document.querySelectorAll('.beer-slide'));
-            const prev = document.getElementById('beerPrev');
-            const next = document.getElementById('beerNext');
-            const dotsWrap = document.getElementById('beerDots');
-            if (track && slides.length) {
-                let index = 0;
-                let autoplay; const AUTOPLAY_MS = 3500;
-                const setActive = () => {
-                    slides.forEach((s,i)=> s.classList.toggle('active', i===index));
-                    dotsWrap.querySelectorAll('.beer-dot').forEach((d,i)=> d.classList.toggle('active', i===index));
-                };
-                const update = () => {
-                    track.style.transform = `translateX(-${index * 100}%)`;
+            // Beer slider logic (click-only)
+            const beerContainer = document.querySelector('#beer .beer-slider');
+            if (beerContainer) {
+                const track = beerContainer.querySelector('.beer-track');
+                const slides = Array.from(beerContainer.querySelectorAll('.beer-slide'));
+                const prev = document.getElementById('beerPrev');
+                const next = document.getElementById('beerNext');
+                const dotsWrap = document.getElementById('beerDots');
+                if (track && slides.length) {
+                    let index = 0;
+                    const setActive = () => {
+                        slides.forEach((s,i)=> s.classList.toggle('active', i===index));
+                        dotsWrap.querySelectorAll('.beer-dot').forEach((d,i)=> d.classList.toggle('active', i===index));
+                    };
+                    const update = () => {
+                        track.style.transform = `translateX(-${index * 100}%)`;
+                        setActive();
+                    };
+                    dotsWrap.innerHTML = '';
+                    slides.forEach((_, i)=>{
+                        const dot = document.createElement('button');
+                        dot.className = 'beer-dot' + (i===0?' active':'');
+                        dot.addEventListener('click', ()=>{ index = i; update(); });
+                        dotsWrap.appendChild(dot);
+                    });
+                    const goPrev = () => { index = (index - 1 + slides.length) % slides.length; update(); };
+                    const goNext = () => { index = (index + 1) % slides.length; update(); };
+                    prev && prev.addEventListener('click', goPrev);
+                    next && next.addEventListener('click', goNext);
+                    // no autoplay, no swipe — click-only navigation
                     setActive();
-                };
-                slides.forEach((_, i)=>{
-                    const dot = document.createElement('button');
-                    dot.className = 'beer-dot' + (i===0?' active':'');
-                    dot.addEventListener('click', ()=>{ index = i; update(); restart(); });
-                    dotsWrap.appendChild(dot);
-                });
-                const goPrev = () => { index = (index - 1 + slides.length) % slides.length; update(); };
-                const goNext = () => { index = (index + 1) % slides.length; update(); };
-                prev && prev.addEventListener('click', ()=>{ goPrev(); restart(); });
-                next && next.addEventListener('click', ()=>{ goNext(); restart(); });
-                let startX = 0; let dx = 0; let dragging = false;
-                track.addEventListener('touchstart', (e)=>{ dragging = true; startX = e.touches[0].clientX; pause(); }, {passive:true});
-                track.addEventListener('touchmove', (e)=>{ if(!dragging) return; dx = e.touches[0].clientX - startX; }, {passive:true});
-                track.addEventListener('touchend', ()=>{ if(Math.abs(dx)>50){ dx>0?goPrev():goNext(); } dragging=false; dx=0; restart(); });
-                const pause = ()=> clearInterval(autoplay);
-                const start = ()=> autoplay = setInterval(goNext, AUTOPLAY_MS);
-                const restart = ()=> { pause(); start(); };
-                const slider = document.querySelector('.beer-slider');
-                slider.addEventListener('mouseenter', pause);
-                slider.addEventListener('mouseleave', start);
-                start(); setActive();
+                }
             }
 
-            // Stores slider (reuse logic)
-            const storesTrack = document.querySelector('.stores-track');
-            const storesSlides = Array.from(document.querySelectorAll('.stores-slider .beer-slide'));
-            const storesPrev = document.getElementById('storesPrev');
-            const storesNext = document.getElementById('storesNext');
-            const storesDots = document.getElementById('storesDots');
-            if (storesTrack && storesSlides.length) {
-                let sIndex = 0;
-                let sAutoplay; const S_MS = 4000;
-                const sSetActive = () => {
-                    storesSlides.forEach((s,i)=> s.classList.toggle('active', i===sIndex));
-                    storesDots.querySelectorAll('.beer-dot').forEach((d,i)=> d.classList.toggle('active', i===sIndex));
-                };
-                const sUpdate = ()=>{ storesTrack.style.transform = `translateX(-${sIndex*100}%)`; sSetActive(); };
-                storesSlides.forEach((_, i)=>{
-                    const dot = document.createElement('button');
-                    dot.className = 'beer-dot' + (i===0?' active':'');
-                    dot.addEventListener('click', ()=>{ sIndex = i; sUpdate(); sRestart(); });
-                    storesDots.appendChild(dot);
-                });
-                const sPrev = ()=>{ sIndex = (sIndex - 1 + storesSlides.length) % storesSlides.length; sUpdate(); };
-                const sNext = ()=>{ sIndex = (sIndex + 1) % storesSlides.length; sUpdate(); };
-                storesPrev && storesPrev.addEventListener('click', ()=>{ sPrev(); sRestart(); });
-                storesNext && storesNext.addEventListener('click', ()=>{ sNext(); sRestart(); });
-                const sPause = ()=> clearInterval(sAutoplay);
-                const sStart = ()=> sAutoplay = setInterval(sNext, S_MS);
-                const sRestart = ()=> { sPause(); sStart(); };
-                const sSlider = document.querySelector('.stores-slider');
-                sSlider.addEventListener('mouseenter', sPause);
-                sSlider.addEventListener('mouseleave', sStart);
-                sStart(); sSetActive();
+            // Stores slider (click-only)
+            const storesContainer = document.querySelector('.stores-slider');
+            if (storesContainer) {
+                const storesTrack = storesContainer.querySelector('.stores-track');
+                const storesSlides = Array.from(storesContainer.querySelectorAll('.beer-slide'));
+                const storesPrev = document.getElementById('storesPrev');
+                const storesNext = document.getElementById('storesNext');
+                const storesDots = document.getElementById('storesDots');
+                if (storesTrack && storesSlides.length) {
+                    let sIndex = 0;
+                    const sSetActive = () => {
+                        storesSlides.forEach((s,i)=> s.classList.toggle('active', i===sIndex));
+                        storesDots.querySelectorAll('.beer-dot').forEach((d,i)=> d.classList.toggle('active', i===sIndex));
+                    };
+                    const sUpdate = ()=>{ storesTrack.style.transform = `translateX(-${sIndex*100}%)`; sSetActive(); };
+                    storesDots.innerHTML = '';
+                    storesSlides.forEach((_, i)=>{
+                        const dot = document.createElement('button');
+                        dot.className = 'beer-dot' + (i===0?' active':'');
+                        dot.addEventListener('click', ()=>{ sIndex = i; sUpdate(); });
+                        storesDots.appendChild(dot);
+                    });
+                    const sPrev = ()=>{ sIndex = (sIndex - 1 + storesSlides.length) % storesSlides.length; sUpdate(); };
+                    const sNext = ()=>{ sIndex = (sIndex + 1) % storesSlides.length; sUpdate(); };
+                    storesPrev && storesPrev.addEventListener('click', sPrev);
+                    storesNext && storesNext.addEventListener('click', sNext);
+                    // no autoplay, no swipe — click-only navigation
+                    sSetActive();
+                }
             }
         });
     </script>
