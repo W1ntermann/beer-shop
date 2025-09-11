@@ -1117,6 +1117,24 @@
         #beer .beer-dots { margin-top: 18px; }
         /* Disable underline under section titles */
         .section-title::after { content: none !important; display: none !important; height: 0 !important; }
+        
+        /* Mobile logo and burger menu fixes */
+        @media (max-width: 1024px) {
+            .burger { display: flex; }
+            .logo img { width: 60px; border-radius: 12px; }
+        }
+        @media (max-width: 768px) {
+            .logo img { width: 48px; border-radius: 10px; }
+            .logo-text h1 { font-size: 18px; }
+            .logo-text .tag { font-size: 10px; }
+            .header-container { gap: 16px; }
+        }
+        @media (max-width: 480px) {
+            .logo img { width: 40px; border-radius: 8px; }
+            .logo-text h1 { font-size: 14px; }
+            .logo-text .tag { display: none; }
+            .header-container { gap: 10px; }
+        }
     </style>
     <script>
         document.addEventListener('DOMContentLoaded', function() {
