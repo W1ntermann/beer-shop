@@ -996,6 +996,12 @@
         footer { background: transparent !important; }
         /* Remove hero overlay to match global gradient */
         .hero::before { content: none !important; display: none !important; }
+        /* Beer slider adjustments */
+        #beer .beer-slide .price { display: none; }
+        #beer .beer-slider { margin-bottom: 18px; }
+        #beer .beer-dots { margin-top: 18px; }
+        /* Disable underline under section titles */
+        .section-title::after { content: none !important; display: none !important; height: 0 !important; }
     </style>
     <script>
         document.addEventListener('DOMContentLoaded', function() {
