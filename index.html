@@ -999,13 +999,14 @@
                 });
             });
 
-            // Scroll to #main on load
+            // Scroll to #main on load with header offset
             const mainSection = document.getElementById('main');
+            const headerEl = document.querySelector('header');
             if (mainSection) {
-                if (location.hash !== '#main') {
-                    mainSection.scrollIntoView({ behavior: 'auto', block: 'start' });
-                    history.replaceState(null, '', '#main');
-                }
+                const headerH = headerEl ? headerEl.offsetHeight : 0;
+                const top = mainSection.getBoundingClientRect().top + window.pageYOffset - headerH - 8;
+                window.scrollTo({ top, left: 0, behavior: 'auto' });
+                history.replaceState(null, '', '#main');
             }
 
             // Beer slider logic (click-only)
