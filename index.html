@@ -759,7 +759,80 @@
             color: #fff;
             border: 2px solid var(--yellow);
         }
+        .burger {
+            display: none;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            width: 44px;
+            height: 44px;
+            cursor: pointer;
+            z-index: 200;
+            margin-left: 18px;
+        }
+        .burger span {
+            display: block;
+            width: 30px;
+            height: 4px;
+            margin: 4px 0;
+            background: var(--graphite-dark);
+            border-radius: 2px;
+            transition: 0.4s;
+        }
+        .burger.active span:nth-child(1) {
+            transform: translateY(8px) rotate(45deg);
+        }
+        .burger.active span:nth-child(2) {
+            opacity: 0;
+        }
+        .burger.active span:nth-child(3) {
+            transform: translateY(-8px) rotate(-45deg);
+        }
+        @media (max-width: 1024px) {
+            .burger { display: flex; }
+            .nav-menu {
+                position: fixed;
+                top: 0; right: 0;
+                height: 100vh;
+                width: 260px;
+                background: var(--graphite-dark);
+                flex-direction: column;
+                align-items: flex-start;
+                padding: 80px 32px 32px 32px;
+                box-shadow: -4px 0 24px rgba(0,0,0,0.25);
+                transform: translateX(100%);
+                transition: transform 0.4s cubic-bezier(.77,0,.18,1);
+                z-index: 150;
+                display: flex;
+                gap: 0;
+            }
+            .nav-menu li {
+                margin: 0 0 24px 0;
+            }
+            .nav-menu.nav-active {
+                transform: translateX(0);
+            }
+            .nav-menu a {
+                background: none;
+                color: var(--yellow);
+                font-size: 22px;
+                padding: 12px 0;
+                border-radius: 0;
+                width: 100%;
+                display: block;
+            }
+        }
     </style>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const burger = document.querySelector('.burger');
+            const nav = document.querySelector('.nav-menu');
+            burger && burger.addEventListener('click', function() {
+                nav.classList.toggle('nav-active');
+                burger.classList.toggle('active');
+            });
+        });
+    </script>
 </head>
 <body>
     <!-- Header -->
@@ -767,7 +840,6 @@
         <div class="container header-container">
         <a href="#" class="logo" aria-label="Пивас — головна">
             <span class="logo-badge">
-                <!-- Поставте сюди вашу оригінальну картинку -->
                 <img src="afeab7fa-4c38-4d81-84d5-405b8cf196d2.jpg" alt="ПИВАС логотип">
             </span>
             <span class="logo-text">
@@ -775,6 +847,9 @@
                 <span class="tag">МАГАЗИН РАЗЛИВНОГО ПИВА</span>
             </span>
         </a>
+        <div class="burger" aria-label="Меню" tabindex="0">
+            <span></span><span></span><span></span>
+        </div>
         <ul class="nav-menu">
             <li><a href="#main">Головна</a></li>
             <li><a href="#stores">Магазини</a></li>
@@ -785,7 +860,6 @@
             <li><a href="#delivery">Доставка</a></li>
         </ul>
     </div>
-        </div>
     </header>
 
     <!-- Hero Section -->
