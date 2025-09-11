@@ -994,6 +994,8 @@
         body { background: linear-gradient(135deg, var(--graphite-dark) 0%, var(--graphite) 50%, var(--graphite-light) 100%) !important; }
         body::before { content: none !important; display: none !important; }
         footer { background: transparent !important; }
+        /* Remove hero overlay to match global gradient */
+        .hero::before { content: none !important; display: none !important; }
     </style>
     <script>
         document.addEventListener('DOMContentLoaded', function() {
