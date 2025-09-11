@@ -992,6 +992,15 @@
                 });
             });
 
+            // Scroll to #main on load
+            const mainSection = document.getElementById('main');
+            if (mainSection) {
+                if (location.hash !== '#main') {
+                    mainSection.scrollIntoView({ behavior: 'auto', block: 'start' });
+                    history.replaceState(null, '', '#main');
+                }
+            }
+
             // Beer slider logic (click-only)
             const beerContainer = document.querySelector('#beer .beer-slider');
             if (beerContainer) {
