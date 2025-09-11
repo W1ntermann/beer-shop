@@ -241,48 +241,48 @@
 }
         
         
-        
-        .nav-menu {
-            display: flex;
-            list-style: none;
-        }
-        
-        .nav-menu li {
-            margin-left: 25px;
-        }
-        
-        .nav-menu a {
-            color: var(--graphite-dark);
-            font-weight: 600;
-            font-size: 16px;
-            padding: 12px 16px;
-            letter-spacing: 0.5px;
-            transition: all var(--transition);
-            position: relative;
-            text-decoration: none;
-            border-radius: 8px;
-            background: var(--yellow);
-        }
-        .nav-menu a:after {
-            background: var(--yellow) !important;
-            content: '';
-            position: absolute;
-            width: 0;
-            height: 2px;
-            bottom: 6px;
-            left: 50%;
-            transform: translateX(-50%);
-            transition: width 0.3s;
-            border-radius: 1px;
-        }
-        .nav-menu a:hover {
-            color: var(--yellow-dark);
-            background: var(--yellow);
-            box-shadow: 0 2px 8px 0 rgba(44,44,44,0.10);
-        }
-        .nav-menu a:hover:after {
-            width: 80%;
-        }
+.nav-menu {
+    display: flex;
+    list-style: none;
+}
+
+.nav-menu li {
+    margin-left: 25px;
+}
+
+.nav-menu a {
+    color: var(--yellow);
+    font-weight: 600;
+    font-size: 16px;
+    padding: 8px 4px;
+    letter-spacing: 0.5px;
+    transition: all var(--transition);
+    position: relative;
+    text-decoration: none;
+    border-radius: 4px;
+    background: transparent; /* 🔥 прибрали жовтий фон */
+}
+
+.nav-menu a:after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    bottom: -2px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--yellow); /* 🔥 тепер видно */
+    transition: width 0.3s;
+    border-radius: 1px;
+}
+
+.nav-menu a:hover {
+    color: var(--yellow-bright);
+}
+
+.nav-menu a:hover:after {
+    width: 100%; /* 🔥 з’являється підкреслення */
+}
         
         /* Hero section */
         .hero {
@@ -1143,10 +1143,6 @@
         <div class="container header-container">
             <a href="#" class="logo" aria-label="Пивас — головна">
                 <img src="logopivas.jpg" alt="ПИВАС логотип">
-                <span class="logo-text">
-                    <h1>ПИВАС</h1>
-                    <span class="tag">МАГАЗИН РАЗЛИВНОГО ПИВА</span>
-                </span>
             </a>
             <div class="burger" aria-label="Меню" tabindex="0">
                 <span></span><span></span><span></span>
