@@ -968,10 +968,12 @@
         .beer-slide, .stores-slider .beer-slide { display: block; }
         .beer-slide .product-card, .stores-slider .store-card { height: auto; }
         .beer-slide .product-img, .stores-slider .store-img { width: 100%; }
-        /* Remove yellow separators in header and footer */
-        header { border-bottom: none; }
-        header::after { display: none; }
-        footer { border-top: none; }
+        /* Force remove yellow separator line globally */
+        header { border-bottom: 0 !important; }
+        header::after { content: none !important; display: none !important; height: 0 !important; background: none !important; }
+        .hero::after { content: none !important; display: none !important; }
+        footer { border-top: 0 !important; }
+        footer::before { display: none !important; content: none !important; }
     </style>
     <script>
         document.addEventListener('DOMContentLoaded', function() {
