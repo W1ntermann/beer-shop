@@ -216,25 +216,23 @@
             border-radius: 8px;
             background: var(--yellow);
         }
-        
         .nav-menu a:after {
-            background: var(--yellow);
+            background: var(--yellow-dark);
             content: '';
             position: absolute;
             width: 0;
             height: 2px;
-            bottom: 8px;
+            bottom: 6px;
             left: 50%;
             transform: translateX(-50%);
             transition: width 0.3s;
             border-radius: 1px;
         }
-        
         .nav-menu a:hover {
             color: var(--yellow-dark);
-            background: var(--graphite-light);
+            background: var(--yellow);
+            box-shadow: 0 2px 8px 0 rgba(44,44,44,0.10);
         }
-        
         .nav-menu a:hover:after {
             width: 80%;
         }
