@@ -1087,12 +1087,46 @@
         @media (max-width: 768px) {
             .beer-slide .product-img, .stores-slider .store-img { max-height: 220px; }
         }
+        /* Drinks slider styles */
+        .drinks-slider { position: relative; overflow: hidden; border-radius: 20px; box-shadow: 0 12px 36px rgba(0,0,0,0.28); }
+        .drinks-track { display: flex; transition: transform 600ms cubic-bezier(.22,.61,.36,1); will-change: transform; }
+        .drinks-slide { min-width: 100%; position: relative; }
+        .drinks-slide .product-card { margin: 0; background: #FCC300; border: 0; border-radius: 20px; }
+        .drinks-slide .product-img { height: 320px; }
+        .drinks-slide .product-img img { transform: scale(1.02); transition: transform 800ms ease, filter 800ms ease; }
+        .drinks-slide.active .product-img img { transform: scale(1.08); filter: saturate(1.1); }
+        .drinks-gradient { position:absolute; inset:0; background: linear-gradient(180deg, rgba(0,0,0,0.0) 55%, rgba(26,26,26,0.35) 100%); pointer-events:none; border-radius: 20px; }
+        .drinks-nav { position: absolute; inset: 0; display: flex; justify-content: space-between; align-items: center; pointer-events:none; padding: 0 8px; }
+        .drinks-btn { pointer-events: auto; width: 46px; height: 46px; border-radius: 50%; border: 2px solid #FCC300; background: rgba(26,26,26,0.55); color: #FCC300; display:grid; place-items:center; cursor:pointer; backdrop-filter: blur(6px); transition: transform .2s, background .2s, box-shadow .2s; box-shadow: 0 6px 18px rgba(0,0,0,0.25); }
+        .drinks-btn:hover { transform: scale(1.07); background: rgba(26,26,26,0.8); }
+        .drinks-dots { display:flex; gap:10px; justify-content:center; margin-top:14px; }
+        .drinks-dot { width: 12px; height: 12px; border-radius: 50%; background: rgba(252,195,0,0.35); border:1.5px solid #FCC300; cursor:pointer; transition: transform .2s, background .2s; }
+        .drinks-dot:hover { transform: scale(1.15); }
+        .drinks-dot.active { background: #FCC300; box-shadow: 0 0 12px rgba(252,195,0,0.6); transform: scale(1.2); }
+
+        /* Snacks slider styles */
+        .snacks-slider { position: relative; overflow: hidden; border-radius: 20px; box-shadow: 0 12px 36px rgba(0,0,0,0.28); }
+        .snacks-track { display: flex; transition: transform 600ms cubic-bezier(.22,.61,.36,1); will-change: transform; }
+        .snacks-slide { min-width: 100%; position: relative; }
+        .snacks-slide .product-card { margin: 0; background: #FCC300; border: 0; border-radius: 20px; }
+        .snacks-slide .product-img { height: 320px; }
+        .snacks-slide .product-img img { transform: scale(1.02); transition: transform 800ms ease, filter 800ms ease; }
+        .snacks-slide.active .product-img img { transform: scale(1.08); filter: saturate(1.1); }
+        .snacks-gradient { position:absolute; inset:0; background: linear-gradient(180deg, rgba(0,0,0,0.0) 55%, rgba(26,26,26,0.35) 100%); pointer-events:none; border-radius: 20px; }
+        .snacks-nav { position: absolute; inset: 0; display: flex; justify-content: space-between; align-items: center; pointer-events:none; padding: 0 8px; }
+        .snacks-btn { pointer-events: auto; width: 46px; height: 46px; border-radius: 50%; border: 2px solid #FCC300; background: rgba(26,26,26,0.55); color: #FCC300; display:grid; place-items:center; cursor:pointer; backdrop-filter: blur(6px); transition: transform .2s, background .2s, box-shadow .2s; box-shadow: 0 6px 18px rgba(0,0,0,0.25); }
+        .snacks-btn:hover { transform: scale(1.07); background: rgba(26,26,26,0.8); }
+        .snacks-dots { display:flex; gap:10px; justify-content:center; margin-top:14px; }
+        .snacks-dot { width: 12px; height: 12px; border-radius: 50%; background: rgba(252,195,0,0.35); border:1.5px solid #FCC300; cursor:pointer; transition: transform .2s, background .2s; }
+        .snacks-dot:hover { transform: scale(1.15); }
+        .snacks-dot.active { background: #FCC300; box-shadow: 0 0 12px rgba(252,195,0,0.6); transform: scale(1.2); }
+
         /* Make slider block adapt to image size */
-        .beer-slider, .stores-slider { height: auto; }
-        .beer-track, .stores-track { align-items: stretch; }
-        .beer-slide, .stores-slider .beer-slide { display: block; }
-        .beer-slide .product-card, .stores-slider .store-card { height: auto; }
-        .beer-slide .product-img, .stores-slider .store-img { width: 100%; }
+        .beer-slider, .stores-slider, .drinks-slider, .snacks-slider { height: auto; }
+        .beer-track, .stores-track, .drinks-track, .snacks-track { align-items: stretch; }
+        .beer-slide, .stores-slider .beer-slide, .drinks-slide, .snacks-slide { display: block; }
+        .beer-slide .product-card, .stores-slider .store-card, .drinks-slide .product-card, .snacks-slide .product-card { height: auto; }
+        .beer-slide .product-img, .stores-slider .store-img, .drinks-slide .product-img, .snacks-slide .product-img { width: 100%; }
         /* Force remove yellow separator line globally */
         header { border-bottom: 0 !important; }
         header::after { content: none !important; display: none !important; height: 0 !important; background: none !important; }
@@ -1231,6 +1265,62 @@
                     storesNext && storesNext.addEventListener('click', sNext);
                     // no autoplay, no swipe — click-only navigation
                     sSetActive();
+                }
+            }
+
+            // Drinks slider (click-only)
+            const drinksContainer = document.querySelector('.drinks-slider');
+            if (drinksContainer) {
+                const drinksTrack = drinksContainer.querySelector('.drinks-track');
+                const drinksSlides = Array.from(drinksContainer.querySelectorAll('.drinks-slide'));
+                const drinksPrev = drinksContainer.querySelector('.drinks-prev');
+                const drinksNext = drinksContainer.querySelector('.drinks-next');
+                const drinksDots = drinksContainer.querySelector('.drinks-dots');
+                if (drinksTrack && drinksSlides.length) {
+                    let dIndex = 0;
+                    const dSetActive = () => {
+                        drinksSlides.forEach((s,i)=> s.classList.toggle('active', i===dIndex));
+                        drinksDots.querySelectorAll('.drinks-dot').forEach((d,i)=> d.classList.toggle('active', i===dIndex));
+                    };
+                    const dUpdate = ()=>{ drinksTrack.style.transform = `translateX(-${dIndex*100}%)`; dSetActive(); };
+                    
+                    drinksDots.querySelectorAll('.drinks-dot').forEach((dot, i) => {
+                        dot.addEventListener('click', () => { dIndex = i; dUpdate(); });
+                    });
+                    
+                    const dPrev = ()=>{ dIndex = (dIndex - 1 + drinksSlides.length) % drinksSlides.length; dUpdate(); };
+                    const dNext = ()=>{ dIndex = (dIndex + 1) % drinksSlides.length; dUpdate(); };
+                    drinksPrev && drinksPrev.addEventListener('click', dPrev);
+                    drinksNext && drinksNext.addEventListener('click', dNext);
+                    dSetActive();
+                }
+            }
+
+            // Snacks slider (click-only)
+            const snacksContainer = document.querySelector('.snacks-slider');
+            if (snacksContainer) {
+                const snacksTrack = snacksContainer.querySelector('.snacks-track');
+                const snacksSlides = Array.from(snacksContainer.querySelectorAll('.snacks-slide'));
+                const snacksPrev = snacksContainer.querySelector('.snacks-prev');
+                const snacksNext = snacksContainer.querySelector('.snacks-next');
+                const snacksDots = snacksContainer.querySelector('.snacks-dots');
+                if (snacksTrack && snacksSlides.length) {
+                    let snIndex = 0;
+                    const snSetActive = () => {
+                        snacksSlides.forEach((s,i)=> s.classList.toggle('active', i===snIndex));
+                        snacksDots.querySelectorAll('.snacks-dot').forEach((d,i)=> d.classList.toggle('active', i===snIndex));
+                    };
+                    const snUpdate = ()=>{ snacksTrack.style.transform = `translateX(-${snIndex*100}%)`; snSetActive(); };
+                    
+                    snacksDots.querySelectorAll('.snacks-dot').forEach((dot, i) => {
+                        dot.addEventListener('click', () => { snIndex = i; snUpdate(); });
+                    });
+                    
+                    const snPrev = ()=>{ snIndex = (snIndex - 1 + snacksSlides.length) % snacksSlides.length; snUpdate(); };
+                    const snNext = ()=>{ snIndex = (snIndex + 1) % snacksSlides.length; snUpdate(); };
+                    snacksPrev && snacksPrev.addEventListener('click', snPrev);
+                    snacksNext && snacksNext.addEventListener('click', snNext);
+                    snSetActive();
                 }
             }
         });
@@ -1414,38 +1504,53 @@
             <div class="section-title">
                 <h2>Інші напої</h2>
             </div>
-            <div class="products-grid">
-                <div class="product-card">
-                    <div class="product-img">
-                        <img src="https://images.unsplash.com/photo-1506377247377-2a5b3b417ebb?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Вино">
+            <div class="drinks-slider">
+                <div class="drinks-track">
+                    <div class="drinks-slide active">
+                        <div class="product-card">
+                            <div class="product-img">
+                                <img src="https://images.unsplash.com/photo-1506377247377-2a5b3b417ebb?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Вино">
+                            </div>
+                            <div class="drinks-gradient"></div>
+                            <div class="product-info">
+                                <h3>Вино</h3>
+                                <p>Червоне та біле вино різних сортів з усього світу</p>
+                            </div>
+                        </div>
                     </div>
-                    <div class="product-info">
-                        <h3>Вино</h3>
-                        <p>Червоне та біле вино різних сортів з усього світу</p>
-                        <div class="price">від 80 грн/л</div>
+                    <div class="drinks-slide">
+                        <div class="product-card">
+                            <div class="product-img">
+                                <img src="https://images.unsplash.com/photo-1571934811356-5cc061b6821f?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Сидр">
+                            </div>
+                            <div class="drinks-gradient"></div>
+                            <div class="product-info">
+                                <h3>Сидр</h3>
+                                <p>Освіжаючий яблучний та грушевий сидр з натуральних фруктів</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="drinks-slide">
+                        <div class="product-card">
+                            <div class="product-img">
+                                <img src="https://images.unsplash.com/photo-1544145945-f90425340c7e?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Безалкогольні напої">
+                            </div>
+                            <div class="drinks-gradient"></div>
+                            <div class="product-info">
+                                <h3>Безалкогольні напої</h3>
+                                <p>Лимонад, квас, соки та інші освіжаючі напої</p>
+                            </div>
+                        </div>
                     </div>
                 </div>
-                
-                <div class="product-card">
-                    <div class="product-img">
-                        <img src="https://images.unsplash.com/photo-1571934811356-5cc061b6821f?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Сидр">
-                    </div>
-                    <div class="product-info">
-                        <h3>Сидр</h3>
-                        <p>Освіжаючий яблучний та грушевий сидр з натуральних фруктів</p>
-                        <div class="price">від 35 грн/л</div>
-                    </div>
+                <div class="drinks-nav">
+                    <button class="drinks-btn drinks-prev">❮</button>
+                    <button class="drinks-btn drinks-next">❯</button>
                 </div>
-                
-                <div class="product-card">
-                    <div class="product-img">
-                        <img src="https://images.unsplash.com/photo-1544145945-f90425340c7e?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Безалкогольні напої">
-                    </div>
-                    <div class="product-info">
-                        <h3>Безалкогольні напої</h3>
-                        <p>Лимонад, квас, соки та інші освіжаючі напої</p>
-                        <div class="price">від 15 грн/л</div>
-                    </div>
+                <div class="drinks-dots">
+                    <span class="drinks-dot active" data-slide="0"></span>
+                    <span class="drinks-dot" data-slide="1"></span>
+                    <span class="drinks-dot" data-slide="2"></span>
                 </div>
             </div>
         </div>
@@ -1457,38 +1562,53 @@
             <div class="section-title">
                 <h2>Закуски</h2>
             </div>
-            <div class="products-grid">
-                <div class="product-card">
-                    <div class="product-img">
-                        <img src="https://images.unsplash.com/photo-1566478989037-eec170784d0b?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Чипси та снеки">
+            <div class="snacks-slider">
+                <div class="snacks-track">
+                    <div class="snacks-slide active">
+                        <div class="product-card">
+                            <div class="product-img">
+                                <img src="https://images.unsplash.com/photo-1566478989037-eec170784d0b?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Чипси та снеки">
+                            </div>
+                            <div class="snacks-gradient"></div>
+                            <div class="product-info">
+                                <h3>Чипси та снеки</h3>
+                                <p>Різноманітні чипси, сухарики та інші хрусткі снеки</p>
+                            </div>
+                        </div>
                     </div>
-                    <div class="product-info">
-                        <h3>Чипси та снеки</h3>
-                        <p>Різноманітні чипси, сухарики та інші хрусткі снеки</p>
-                        <div class="price">від 20 грн</div>
+                    <div class="snacks-slide">
+                        <div class="product-card">
+                            <div class="product-img">
+                                <img src="https://images.unsplash.com/photo-1529692236671-f1f6cf9683ba?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="М'ясні страви">
+                            </div>
+                            <div class="snacks-gradient"></div>
+                            <div class="product-info">
+                                <h3>М'ясні страви</h3>
+                                <p>Ковбаси, сир, м'ясні нарізки та ароматні копченості</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="snacks-slide">
+                        <div class="product-card">
+                            <div class="product-img">
+                                <img src="https://images.unsplash.com/photo-1486297678162-eb2a19b0a32d?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Сирна тарілка">
+                            </div>
+                            <div class="snacks-gradient"></div>
+                            <div class="product-info">
+                                <h3>Сирна тарілка</h3>
+                                <p>Асорті з різних сортів сиру та свіжих фруктів</p>
+                            </div>
+                        </div>
                     </div>
                 </div>
-                
-                <div class="product-card">
-                    <div class="product-img">
-                        <img src="https://images.unsplash.com/photo-1529692236671-f1f6cf9683ba?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="М'ясні страви">
-                    </div>
-                    <div class="product-info">
-                        <h3>М'ясні страви</h3>
-                        <p>Ковбаси, сир, м'ясні нарізки та ароматні копченості</p>
-                        <div class="price">від 50 грн</div>
-                    </div>
+                <div class="snacks-nav">
+                    <button class="snacks-btn snacks-prev">❮</button>
+                    <button class="snacks-btn snacks-next">❯</button>
                 </div>
-                
-                <div class="product-card">
-                    <div class="product-img">
-                        <img src="https://images.unsplash.com/photo-1486297678162-eb2a19b0a32d?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Сирна тарілка">
-                    </div>
-                    <div class="product-info">
-                        <h3>Сирна тарілка</h3>
-                        <p>Асорті з різних сортів сиру та свіжих фруктів</p>
-                        <div class="price">від 80 грн</div>
-                    </div>
+                <div class="snacks-dots">
+                    <span class="snacks-dot active" data-slide="0"></span>
+                    <span class="snacks-dot" data-slide="1"></span>
+                    <span class="snacks-dot" data-slide="2"></span>
                 </div>
             </div>
         </div>
