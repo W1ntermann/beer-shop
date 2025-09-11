@@ -109,21 +109,11 @@
         }
             
         .logo-badge {
-            width: 64px;
-            height: 64px;
-            border-radius: 12px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 6px;
-            background: linear-gradient(135deg, var(--yellow) 0%, var(--yellow-bright) 100%);
-            box-shadow: var(--shadow);
-            border: 2px solid var(--graphite);
-            overflow: hidden;
-            flex-shrink: 0;
+            width: 90px;
+            height: 90px;
+            border-radius: 18px;
+            padding: 8px;
         }
-            
-
         .logo-badge img {
             display: block;
             width: 100%;
@@ -131,19 +121,26 @@
             object-fit: contain;
             border-radius: 18px;
             box-shadow: 0 6px 32px 0 rgba(44,44,44,0.35), 0 0 0 6px rgba(255,215,0,0.12);
-            border: 2.5px solid var(--yellow);
+            border: 3.5px solid var(--yellow);
             background: linear-gradient(135deg, rgba(255,255,255,0.12) 0%, rgba(44,44,44,0.08) 100%);
             transition: box-shadow 0.3s, border-color 0.3s, transform 0.3s;
         }
         .logo-badge img:hover {
             box-shadow: 0 12px 48px 0 rgba(255,215,0,0.25), 0 0 0 10px rgba(255,215,0,0.18);
             border-color: var(--yellow-bright);
-            transform: scale(1.04) rotate(-2deg);
+            transform: scale(1.07) rotate(-2deg);
         }
         @media (max-width: 600px) {
+            .logo-badge {
+                width: 64px;
+                height: 64px;
+                border-radius: 12px;
+                padding: 4px;
+            }
             .logo-badge img {
                 border-radius: 12px;
                 box-shadow: 0 2px 12px 0 rgba(44,44,44,0.18), 0 0 0 2px rgba(255,215,0,0.10);
+                border-width: 2px;
             }
         }
         
