@@ -962,6 +962,12 @@
         @media (max-width: 768px) {
             .beer-slide .product-img, .stores-slider .store-img { max-height: 220px; }
         }
+        /* Make slider block adapt to image size */
+        .beer-slider, .stores-slider { height: auto; }
+        .beer-track, .stores-track { align-items: stretch; }
+        .beer-slide, .stores-slider .beer-slide { display: block; }
+        .beer-slide .product-card, .stores-slider .store-card { height: auto; }
+        .beer-slide .product-img, .stores-slider .store-img { width: 100%; }
     </style>
     <script>
         document.addEventListener('DOMContentLoaded', function() {
