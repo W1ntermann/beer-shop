@@ -5,7 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Пивас - Крафтове пиво та затишна атмосфера</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700;800;900&family=Source+Sans+3:wght@400;500;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400&display=swap" rel="stylesheet">
+    <link href="https://fonts.cdnfonts.com/css/lumberjack-rough" rel="stylesheet">
+
     <style>
         :root {
             --yellow: #FFD700;
@@ -32,8 +34,10 @@
             font-family: 'Source Sans 3', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
         h1, h2, h3, .logo-text h1 {
-            font-family: 'Cinzel', serif;
-            letter-spacing: 1px;
+        font-family: 'Lumberjack Rough', serif;
+        font-weight: 700;
+        letter-spacing: 1px;
+        text-shadow: 2px 2px 5px rgba(0,0,0,0.7);
         }
         html { scroll-behavior: smooth; }
         section { scroll-margin-top: 110px; }
@@ -43,7 +47,11 @@
             color: var(--yellow);
             line-height: 1.6;
             min-height: 100vh;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: 'Lato', sans-serif;;
+        }
+
+        body, p, span, li, a {
+    font-family: 'Lato', sans-serif;
         }
         
         body::before {
@@ -104,13 +112,13 @@
         }
         
         .logo img {
-            width: 80px;
-            height: 80px;
-            border-radius: 16px;
-            box-shadow: 0 4px 18px 0 rgba(44,44,44,0.4);
+            width: 120px;      /* ширше */
+            height: 70px;      /* нижче, щоб не квадрат */
+            border-radius: 14px;
+            object-fit: cover;
             background: var(--yellow);
             border: 2px solid var(--yellow);
-            object-fit: cover;
+            box-shadow: 0 4px 18px rgba(44,44,44,0.4);
         }
         
         .logo-text h1 {
