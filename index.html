@@ -953,6 +953,15 @@
             .beer-slide .product-img { height: 220px; }
             .beer-btn { width: 40px; height: 40px; }
         }
+        /* Organic image sizing for sliders */
+        .beer-slide .product-img { aspect-ratio: 16/9; height: auto; max-height: 420px; }
+        .stores-slider .store-img { aspect-ratio: 16/9; height: auto; max-height: 420px; }
+        @media (max-width: 1024px) {
+            .beer-slide .product-img, .stores-slider .store-img { max-height: 300px; }
+        }
+        @media (max-width: 768px) {
+            .beer-slide .product-img, .stores-slider .store-img { max-height: 220px; }
+        }
     </style>
     <script>
         document.addEventListener('DOMContentLoaded', function() {
