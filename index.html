@@ -990,6 +990,10 @@
         .hero { background: transparent !important; }
         section { background: transparent !important; }
         .franchise { background: transparent !important; }
+        /* Global unified background color/gradient */
+        body { background: linear-gradient(135deg, var(--graphite-dark) 0%, var(--graphite) 50%, var(--graphite-light) 100%) !important; }
+        body::before { content: none !important; display: none !important; }
+        footer { background: transparent !important; }
     </style>
     <script>
         document.addEventListener('DOMContentLoaded', function() {
