@@ -69,60 +69,95 @@
         }
         
         /* Header styles */
+        
         header {
-            background: var(--yellow);
-            backdrop-filter: blur(8px);
+            background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('logopivas.jpg') center/cover no-repeat;
+            backdrop-filter: none;
             box-shadow: var(--shadow);
-            border-bottom: 2px solid var(--yellow);
             position: sticky;
             top: 0;
             z-index: 100;
             transition: all var(--transition);
-        }
-        
-        header::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            height: 3px;
-            background: linear-gradient(90deg, var(--yellow) 0%, var(--yellow-bright) 50%, var(--yellow) 100%);
+            min-height: 120px;
+            display: flex;
+            align-items: center;
         }
         
         .header-container {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            gap: 32px;
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            position: relative;
+            z-index: 2;
         }
+        
         .logo {
             display: flex;
             align-items: center;
-            gap: 18px;
-            padding: 8px 0 8px 0;
-            border-radius: 0;
-            background: transparent;
-            border: none;
-            box-shadow: none;
+            gap: 16px;
             text-decoration: none;
-            transition: all var(--transition);
+            z-index: 3;
         }
+        
         .logo img {
-            width: 96px;
-            height: auto;
+            width: 80px;
+            height: 80px;
             border-radius: 16px;
-            box-shadow: 0 4px 18px 0 rgba(44,44,44,0.18);
+            box-shadow: 0 4px 18px 0 rgba(44,44,44,0.4);
             background: var(--yellow);
+            border: 2px solid var(--yellow);
+            object-fit: cover;
+        }
+        
+        .logo-text h1 {
+            color: var(--yellow);
+            font-size: 28px;
             margin: 0;
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.8);
+        }
+        
+        .logo-text .tag {
+            color: white;
+            font-size: 12px;
             display: block;
+            margin-top: 4px;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.8);
         }
-        @media (max-width: 900px) {
-            .logo img { width: 64px; border-radius: 12px; }
-            .header-container { gap: 12px; }
+        
+        /* Інші стилі залишаються без змін */
+        
+        /* Адаптація для мобільних пристроїв */
+        @media (max-width: 768px) {
+            header {
+                min-height: 100px;
+            }
+            
+            .logo img {
+                width: 60px;
+                height: 60px;
+            }
+            
+            .logo-text h1 {
+                font-size: 22px;
+            }
+            
+            .logo-text .tag {
+                font-size: 10px;
+            }
         }
-        @media (max-width: 600px) {
-            .logo img { width: 48px; border-radius: 8px; }
+        
+        @media (max-width: 480px) {
+            .logo-text h1 {
+                font-size: 18px;
+            }
+            
+            .logo {
+                gap: 10px;
+            }
         }
         .nav-menu {
             flex: 1 1 auto;
@@ -1101,26 +1136,26 @@
     <!-- Header -->
     <header>
         <div class="container header-container">
-        <a href="#" class="logo" aria-label="Пивас — головна" style="display:flex;align-items:center;gap:16px;">
-            <img src="afeab7fa-4c38-4d81-84d5-405b8cf196d2.jpg" alt="ПИВАС логотип" style="width:96px;height:auto;border-radius:16px;box-shadow:0 4px 18px 0 rgba(44,44,44,0.18);background:var(--yellow);margin:0 0 0 0;">
-            <span class="logo-text">
-                <h1>ПИВАС</h1>
-                <span class="tag">МАГАЗИН РАЗЛИВНОГО ПИВА</span>
-            </span>
-        </a>
-        <div class="burger" aria-label="Меню" tabindex="0">
-            <span></span><span></span><span></span>
+            <a href="#" class="logo" aria-label="Пивас — головна">
+                <img src="logopivas.jpg" alt="ПИВАС логотип">
+                <span class="logo-text">
+                    <h1>ПИВАС</h1>
+                    <span class="tag">МАГАЗИН РАЗЛИВНОГО ПИВА</span>
+                </span>
+            </a>
+            <div class="burger" aria-label="Меню" tabindex="0">
+                <span></span><span></span><span></span>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="#main">Головна</a></li>
+                <li><a href="#stores">Магазини</a></li>
+                <li><a href="#beer">Пиво</a></li>
+                <li><a href="#drinks">Напої</a></li>
+                <li><a href="#snacks">Закуски</a></li>
+                <li><a href="#franchise">Франшиза</a></li>
+                <li><a href="#delivery">Доставка</a></li>
+            </ul>
         </div>
-        <ul class="nav-menu">
-            <li><a href="#main">Головна</a></li>
-            <li><a href="#stores">Магазини</a></li>
-            <li><a href="#beer">Пиво</a></li>
-            <li><a href="#drinks">Напої</a></li>
-            <li><a href="#snacks">Закуски</a></li>
-            <li><a href="#franchise">Франшиза</a></li>
-            <li><a href="#delivery">Доставка</a></li>
-        </ul>
-    </div>
     </header>
 
     <!-- Hero Section -->
