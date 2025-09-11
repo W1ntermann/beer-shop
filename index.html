@@ -991,6 +991,38 @@
                     }
                 });
             });
+
+            // Beer slider logic
+            const track = document.querySelector('.beer-track');
+            const slides = Array.from(document.querySelectorAll('.beer-slide'));
+            const prev = document.getElementById('beerPrev');
+            const next = document.getElementById('beerNext');
+            const dotsWrap = document.getElementById('beerDots');
+            if (track && slides.length) {
+                let index = 0;
+                const update = () => {
+                    track.style.transform = `translateX(-${index * 100}%)`;
+                    dotsWrap.querySelectorAll('.beer-dot').forEach((d, i)=>{
+                        d.classList.toggle('active', i === index);
+                    });
+                };
+                // dots
+                slides.forEach((_, i)=>{
+                    const dot = document.createElement('button');
+                    dot.className = 'beer-dot' + (i===0?' active':'');
+                    dot.addEventListener('click', ()=>{ index = i; update(); });
+                    dotsWrap.appendChild(dot);
+                });
+                const goPrev = () => { index = (index - 1 + slides.length) % slides.length; update(); };
+                const goNext = () => { index = (index + 1) % slides.length; update(); };
+                prev && prev.addEventListener('click', goPrev);
+                next && next.addEventListener('click', goNext);
+                // swipe
+                let startX = 0; let dx = 0; let dragging = false;
+                track.addEventListener('touchstart', (e)=>{ dragging = true; startX = e.touches[0].clientX; }, {passive:true});
+                track.addEventListener('touchmove', (e)=>{ if(!dragging) return; dx = e.touches[0].clientX - startX; }, {passive:true});
+                track.addEventListener('touchend', ()=>{ if(Math.abs(dx)>50){ dx>0?goPrev():goNext(); } dragging=false; dx=0; });
+            }
         });
     </script>
 </head>
@@ -1094,7 +1126,7 @@
                     <div class="beer-slide">
                         <div class="product-card">
                             <div class="product-img">
-                                <img src="https://images.unsplash.com/photo-1608270586620-248524c67de9?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Світле пиво">
+                                <img src="https://images.unsplash.com/photo-1608270586620-248524c67de9?auto=format&fit=crop&w=900&q=80" alt="Світле пиво">
                             </div>
                             <div class="product-info">
                                 <h3>Світле пиво</h3>
@@ -1106,7 +1138,7 @@
                     <div class="beer-slide">
                         <div class="product-card">
                             <div class="product-img">
-                                <img src="https://images.unsplash.com/photo-1513475382585-d06e58bcb0e0?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Темне пиво">
+                                <img src="https://images.unsplash.com/photo-1513475382585-d06e58bcb0e0?auto=format&fit=crop&w=900&q=80" alt="Темне пиво">
                             </div>
                             <div class="product-info">
                                 <h3>Темне пиво</h3>
@@ -1118,7 +1150,7 @@
                     <div class="beer-slide">
                         <div class="product-card">
                             <div class="product-img">
-                                <img src="https://images.unsplash.com/photo-1558642452-9d2a7deb7f62?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Крафтове пиво">
+                                <img src="https://images.unsplash.com/photo-1558642452-9d2a7deb7f62?auto=format&fit=crop&w=900&q=80" alt="Крафтове пиво">
                             </div>
                             <div class="product-info">
                                 <h3>Крафтове пиво</h3>
@@ -1130,7 +1162,7 @@
                     <div class="beer-slide">
                         <div class="product-card">
                             <div class="product-img">
-                                <img src="https://images.unsplash.com/photo-1571613316887-6f8d5cbf7ef7?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Пшеничне пиво">
+                                <img src="https://images.unsplash.com/photo-1571613316887-6f8d5cbf7ef7?auto=format&fit=crop&w=900&q=80" alt="Пшеничне пиво">
                             </div>
                             <div class="product-info">
                                 <h3>Пшеничне пиво</h3>
@@ -1141,9 +1173,9 @@
                     </div>
                 </div>
                 <div class="beer-nav">
-                    <button class="beer-btn prev-btn"><i class="fas fa-chevron-left"></i></button>
-                    <div class="beer-dots"></div>
-                    <button class="beer-btn next-btn"><i class="fas fa-chevron-right"></i></button>
+                    <button class="beer-btn" id="beerPrev" aria-label="Попередній">‹</button>
+                    <div class="beer-dots" id="beerDots"></div>
+                    <button class="beer-btn" id="beerNext" aria-label="Наступний">›</button>
                 </div>
             </div>
         </div>
