@@ -968,6 +968,10 @@
         .beer-slide, .stores-slider .beer-slide { display: block; }
         .beer-slide .product-card, .stores-slider .store-card { height: auto; }
         .beer-slide .product-img, .stores-slider .store-img { width: 100%; }
+        /* Remove yellow separators in header and footer */
+        header { border-bottom: none; }
+        header::after { display: none; }
+        footer { border-top: none; }
     </style>
     <script>
         document.addEventListener('DOMContentLoaded', function() {
