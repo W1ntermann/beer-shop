@@ -1273,7 +1273,7 @@
             .beer-slide .product-img, .stores-slider .store-img { max-height: 220px; }
         }
         /* Drinks slider styles */
-        .drinks-slider { position: relative; overflow: hidden; border-radius: 20px; box-shadow: 0 12px 36px rgba(0,0,0,0.28); }
+        .drinks-slider { position: relative; overflow: visible; padding-bottom: 18px; border-radius: 20px; box-shadow: 0 12px 36px rgba(0,0,0,0.28); }
         .drinks-track { display: flex; transition: transform 600ms cubic-bezier(.22,.61,.36,1); will-change: transform; }
         .drinks-slide { min-width: 100%; position: relative; }
         .drinks-slide .product-card { margin: 0; background: #FCC300; border: 0; border-radius: 20px; }
@@ -1281,16 +1281,16 @@
         .drinks-slide .product-img img { transform: scale(1.02); transition: transform 800ms ease, filter 800ms ease; }
         .drinks-slide.active .product-img img { transform: scale(1.08); filter: saturate(1.1); }
         .drinks-gradient { position:absolute; inset:0; background: linear-gradient(180deg, rgba(0,0,0,0.0) 55%, rgba(26,26,26,0.35) 100%); pointer-events:none; border-radius: 20px; }
-        .drinks-nav { position: absolute; inset: 0; display: flex; justify-content: space-between; align-items: center; pointer-events:none; padding: 0 8px; }
+        .drinks-nav { position: absolute; left: 0; right: 0; top: 0; bottom: 26px; display: flex; justify-content: space-between; align-items: center; pointer-events:none; padding: 0 8px; }
         .drinks-btn { pointer-events: auto; width: 46px; height: 46px; border-radius: 50%; border: 2px solid #FCC300; background: rgba(26,26,26,0.55); color: #FCC300; display:grid; place-items:center; cursor:pointer; backdrop-filter: blur(6px); transition: transform .2s, background .2s, box-shadow .2s; box-shadow: 0 6px 18px rgba(0,0,0,0.25); }
         .drinks-btn:hover { transform: scale(1.07); background: rgba(26,26,26,0.8); }
-        .drinks-dots { display:flex; gap:10px; justify-content:center; margin-top:14px; }
+        .drinks-dots { display:flex; gap:10px; justify-content:center; margin-top:14px; padding-bottom: 6px; }
         .drinks-dot { width: 12px; height: 12px; border-radius: 50%; background: rgba(252,195,0,0.35); border:1.5px solid #FCC300; cursor:pointer; transition: transform .2s, background .2s; }
         .drinks-dot:hover { transform: scale(1.15); }
         .drinks-dot.active { background: #FCC300; box-shadow: 0 0 12px rgba(252,195,0,0.6); transform: scale(1.2); }
 
         /* Snacks slider styles */
-        .snacks-slider { position: relative; overflow: hidden; border-radius: 20px; box-shadow: 0 12px 36px rgba(0,0,0,0.28); }
+        .snacks-slider { position: relative; overflow: visible; padding-bottom: 18px; border-radius: 20px; box-shadow: 0 12px 36px rgba(0,0,0,0.28); }
         .snacks-track { display: flex; transition: transform 600ms cubic-bezier(.22,.61,.36,1); will-change: transform; }
         .snacks-slide { min-width: 100%; position: relative; }
         .snacks-slide .product-card { margin: 0; background: #FCC300; border: 0; border-radius: 20px; }
@@ -1298,10 +1298,10 @@
         .snacks-slide .product-img img { transform: scale(1.02); transition: transform 800ms ease, filter 800ms ease; }
         .snacks-slide.active .product-img img { transform: scale(1.08); filter: saturate(1.1); }
         .snacks-gradient { position:absolute; inset:0; background: linear-gradient(180deg, rgba(0,0,0,0.0) 55%, rgba(26,26,26,0.35) 100%); pointer-events:none; border-radius: 20px; }
-        .snacks-nav { position: absolute; inset: 0; display: flex; justify-content: space-between; align-items: center; pointer-events:none; padding: 0 8px; }
+        .snacks-nav { position: absolute; left: 0; right: 0; top: 0; bottom: 26px; display: flex; justify-content: space-between; align-items: center; pointer-events:none; padding: 0 8px; }
         .snacks-btn { pointer-events: auto; width: 46px; height: 46px; border-radius: 50%; border: 2px solid #FCC300; background: rgba(26,26,26,0.55); color: #FCC300; display:grid; place-items:center; cursor:pointer; backdrop-filter: blur(6px); transition: transform .2s, background .2s, box-shadow .2s; box-shadow: 0 6px 18px rgba(0,0,0,0.25); }
         .snacks-btn:hover { transform: scale(1.07); background: rgba(26,26,26,0.8); }
-        .snacks-dots { display:flex; gap:10px; justify-content:center; margin-top:14px; }
+        .snacks-dots { display:flex; gap:10px; justify-content:center; margin-top:14px; padding-bottom: 6px; }
         .snacks-dot { width: 12px; height: 12px; border-radius: 50%; background: rgba(252,195,0,0.35); border:1.5px solid #FCC300; cursor:pointer; transition: transform .2s, background .2s; }
         .snacks-dot:hover { transform: scale(1.15); }
         .snacks-dot.active { background: #FCC300; box-shadow: 0 0 12px rgba(252,195,0,0.6); transform: scale(1.2); }
