@@ -443,7 +443,7 @@
         }
         
         .section-title h2 {
-            font-size: 40px;
+            font-size: 44px;
             display: inline-block;
             padding: 20px 30px;
             background: #FCC300;
@@ -850,7 +850,7 @@
         /* Responsive */
         @media (max-width: 1024px) {
             .hero-logo { max-width: 500px; }
-            .section-title h2 { font-size: 30px; }
+            .section-title h2 { font-size: 34px; }
         }
         @media (max-width: 768px) {
             .hero-logo { 
@@ -859,7 +859,7 @@
                 border-radius: 24px;
             }
             .hero p { font-size: 17px; }
-            .section-title h2 { font-size: 22px; }
+            .section-title h2 { font-size: 24px; }
             .phone-number { font-size: 18px; padding: 12px 18px; }
             .footer-content { grid-template-columns: 1fr; gap: 24px; }
             section { padding: 60px 0 40px 0; }
@@ -883,7 +883,7 @@
                 line-height: 1.5;
                 margin-bottom: 24px;
             }
-            .section-title h2 { font-size: 16px; }
+            .section-title h2 { font-size: 18px; }
             .btn, .phone-number { font-size: 14px; padding: 8px 14px; }
         }
         .footer-section p, .copyright {
@@ -997,29 +997,21 @@
             position: relative;
         }
         
+        /* Звичайна кнопка закриття (просте X без кола) */
         .burger.active {
             position: fixed;
-            top: 12px;
-            right: 24px;
-            width: 40px;
-            height: 40px;
-            background: rgba(0,0,0,0.55);
-            border: 2px solid #FCC300;
-            border-radius: 50%;
+            top: 14px;
+            right: 20px;
+            width: 28px;
+            height: 28px;
+            background: transparent;
+            border: none;
             z-index: 500;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            box-shadow: 0 8px 20px rgba(0,0,0,0.35);
-            backdrop-filter: blur(6px);
-            transition: background .2s ease, box-shadow .2s ease, transform .2s ease;
         }
-        .burger.active:hover { background: rgba(0,0,0,0.7); box-shadow: 0 10px 28px rgba(0,0,0,0.45); transform: scale(1.03); }
-        .burger.active span { opacity: 0; }
-        .burger.active::before,
-        .burger.active::after { content: ''; position: absolute; width: 22px; height: 2.5px; background: #FCC300; border-radius: 2px; }
-        .burger.active::before { transform: rotate(45deg); }
-        .burger.active::after { transform: rotate(-45deg); }
+        .burger.active span { background: #FCC300; }
+        .burger.active span:nth-child(1) { transform: translateY(0) rotate(45deg); position: absolute; top: 50%; left: 50%; width: 22px; height: 2.5px; transform-origin: center; translate: -50% -50%; }
+        .burger.active span:nth-child(2) { opacity: 0; }
+        .burger.active span:nth-child(3) { transform: translateY(0) rotate(-45deg); position: absolute; top: 50%; left: 50%; width: 22px; height: 2.5px; transform-origin: center; translate: -50% -50%; }
         
         
         /* Просте меню що розгортається */
@@ -1569,7 +1561,7 @@
                                 <img src="lyp-60.jpg" alt="Магазин на вул. Лип Івана та Юрія, 60/1">
                             </div>
                             <div class="store-info">
-                                <h3>Магазин #1</h3>
+                                <h3>Магазин</h3>
                                 <p><i class="fas fa-map-marker-alt"></i> Вул. Лип Івана та Юрія, 60/1</p>
                                 <p><i class="fas fa-phone"></i> 099 463 3694</p>
                             </div>
@@ -1583,7 +1575,7 @@
                                 <img src="lyp-5.jpg" alt="Магазин на вул. Лип Івана та Юрія, 5/1">
                             </div>
                             <div class="store-info">
-                                <h3>Магазин #2</h3>
+                                <h3>Магазин</h3>
                                 <p><i class="fas fa-map-marker-alt"></i> Вул. Лип Івана та Юрія, 5/1</p>
                                 <p><i class="fas fa-phone"></i> 066 010 6819</p>
                             </div>
@@ -1597,7 +1589,7 @@
                                 <img src="stovbova.jpg" alt="Магазин на вул. Стовбова, 27">
                             </div>
                             <div class="store-info">
-                                <h3>Магазин #3</h3>
+                                <h3>Магазин</h3>
                                 <p><i class="fas fa-map-marker-alt"></i> Вул. Стовбова, 27</p>
                                 <p><i class="fas fa-phone"></i> 066 025 6694</p>
                             </div>
@@ -1611,7 +1603,7 @@
                                 <img src="radisna.jpg" alt="Магазин на вул. Радісна 23а">
                             </div>
                             <div class="store-info">
-                                <h3>Магазин #4</h3>
+                                <h3>Магазин</h3>
                                 <p><i class="fas fa-map-marker-alt"></i> Вул. Радісна 23а</p>
                                 <p><i class="fas fa-phone"></i> 066 883 4443</p>
                             </div>
