@@ -518,25 +518,40 @@
         
         .store-info h3 {
             color: var(--graphite);
-            margin-bottom: 16px;
-            font-size: 22px;
-            font-weight: 700;
-            letter-spacing: 0.5px;
+            margin-bottom: 12px;
+            font-size: 24px;
+            font-weight: 800;
+            letter-spacing: 0.6px;
         }
         
         .store-info p {
-            color: var(--graphite-medium);
-            font-size: 16px;
-            margin-bottom: 10px;
             display: flex;
             align-items: center;
+            gap: 10px;
+            color: var(--graphite);
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 10px;
+            padding: 10px 12px;
+            border-radius: 12px;
+            background: linear-gradient(135deg, rgba(252,195,0,0.10) 0%, rgba(44,44,44,0.06) 100%);
+            border: 1px solid rgba(252,195,0,0.35);
+            box-shadow: inset 0 1px 0 rgba(255,255,255,0.2);
         }
+        .store-card:hover .store-info p { border-color: #FCC300; }
+        .store-info p + p { margin-top: 6px; }
         
         .store-info i {
-            margin-right: 12px;
-            color: var(--yellow);
-            width: 20px;
-            font-size: 16px;
+            width: 22px;
+            text-align: center;
+            font-size: 18px;
+            margin-right: 2px;
+            background: linear-gradient(135deg, #FCC300 0%, #FFD700 60%, #FFEB3B 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            color: transparent;
+            filter: drop-shadow(0 1px 2px rgba(0,0,0,0.25));
         }
         
         /* Products section */
@@ -1562,8 +1577,8 @@
                             </div>
                             <div class="store-info">
                                 <h3>Магазин</h3>
-                                <p><i class="fas fa-map-marker-alt"></i> Вул. Лип Івана та Юрія, 60/1</p>
-                                <p><i class="fas fa-phone"></i> 099 463 3694</p>
+                                <p title="Адреса"><i class="fas fa-map-marker-alt" aria-hidden="true"></i><span>Вул. Лип Івана та Юрія, 60/1</span></p>
+                                <p title="Телефон"><i class="fas fa-phone" aria-hidden="true"></i><a href="tel:0994633694" style="color:inherit;text-decoration:none;">099 463 3694</a></p>
                             </div>
                         </div>
                     </div>
@@ -1576,8 +1591,8 @@
                             </div>
                             <div class="store-info">
                                 <h3>Магазин</h3>
-                                <p><i class="fas fa-map-marker-alt"></i> Вул. Лип Івана та Юрія, 5/1</p>
-                                <p><i class="fas fa-phone"></i> 066 010 6819</p>
+                                <p title="Адреса"><i class="fas fa-map-marker-alt" aria-hidden="true"></i><span>Вул. Лип Івана та Юрія, 5/1</span></p>
+                                <p title="Телефон"><i class="fas fa-phone" aria-hidden="true"></i><a href="tel:0660106819" style="color:inherit;text-decoration:none;">066 010 6819</a></p>
                             </div>
                         </div>
                     </div>
@@ -1590,8 +1605,8 @@
                             </div>
                             <div class="store-info">
                                 <h3>Магазин</h3>
-                                <p><i class="fas fa-map-marker-alt"></i> Вул. Стовбова, 27</p>
-                                <p><i class="fas fa-phone"></i> 066 025 6694</p>
+                                <p title="Адреса"><i class="fas fa-map-marker-alt" aria-hidden="true"></i><span>Вул. Стовбова, 27</span></p>
+                                <p title="Телефон"><i class="fas fa-phone" aria-hidden="true"></i><a href="tel:0660256694" style="color:inherit;text-decoration:none;">066 025 6694</a></p>
                             </div>
                         </div>
                     </div>
@@ -1604,8 +1619,8 @@
                             </div>
                             <div class="store-info">
                                 <h3>Магазин</h3>
-                                <p><i class="fas fa-map-marker-alt"></i> Вул. Радісна 23а</p>
-                                <p><i class="fas fa-phone"></i> 066 883 4443</p>
+                                <p title="Адреса"><i class="fas fa-map-marker-alt" aria-hidden="true"></i><span>Вул. Радісна 23а</span></p>
+                                <p title="Телефон"><i class="fas fa-phone" aria-hidden="true"></i><a href="tel:0668834443" style="color:inherit;text-decoration:none;">066 883 4443</a></p>
                             </div>
                         </div>
                     </div>
