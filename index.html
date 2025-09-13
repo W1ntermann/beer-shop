@@ -1000,54 +1000,21 @@
         }
         
         
-        /* Покращення меню що розгортається */
+        /* Просте меню що розгортається */
         .nav-menu {
-            transition: transform 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            transition: transform 0.3s ease;
         }
         
-        .nav-menu.nav-active {
-            animation: slideInWithBounce 0.5s ease-out;
-        }
-        
-        @keyframes slideInWithBounce {
-            0% {
-                transform: translateX(100%);
-                opacity: 0;
-            }
-            60% {
-                transform: translateX(-10px);
-                opacity: 0.8;
-            }
-            80% {
-                transform: translateX(5px);
-                opacity: 0.9;
-            }
-            100% {
-                transform: translateX(0);
-                opacity: 1;
-            }
-        }
-        
-        /* Анімація пунктів меню - тільки для мобільних */
+        /* Проста анімація пунктів меню */
         @media (max-width: 768px) {
             .nav-menu li {
                 opacity: 0;
-                transform: translateX(50px);
-                transition: all 0.3s ease;
+                transition: opacity 0.2s ease;
             }
             
             .nav-menu.nav-active li {
                 opacity: 1;
-                transform: translateX(0);
             }
-            
-            .nav-menu.nav-active li:nth-child(1) { transition-delay: 0.1s; }
-            .nav-menu.nav-active li:nth-child(2) { transition-delay: 0.15s; }
-            .nav-menu.nav-active li:nth-child(3) { transition-delay: 0.2s; }
-            .nav-menu.nav-active li:nth-child(4) { transition-delay: 0.25s; }
-            .nav-menu.nav-active li:nth-child(5) { transition-delay: 0.3s; }
-            .nav-menu.nav-active li:nth-child(6) { transition-delay: 0.35s; }
-            .nav-menu.nav-active li:nth-child(7) { transition-delay: 0.4s; }
         }
         
         /* Для десктопа - завжди видимі */
@@ -1085,7 +1052,7 @@
                 padding: 100px 32px 32px 32px;
                 box-shadow: -4px 0 24px rgba(0,0,0,0.25);
                 transform: translateX(100%);
-                transition: transform 0.4s cubic-bezier(.77,0,.18,1);
+                transition: transform 0.3s ease;
                 z-index: 150;
                 display: flex;
                 gap: 0;
@@ -1455,53 +1422,10 @@
             const burger = document.querySelector('.burger');
             const nav = document.querySelector('.nav-menu');
             
-            // Додаємо звуковий ефект (опціонально)
-            const playClickSound = () => {
-                // Створюємо аудіо контекст для короткого звуку кліку
-                try {
-                    const audioContext = new (window.AudioContext || window.webkitAudioContext)();
-                    const oscillator = audioContext.createOscillator();
-                    const gainNode = audioContext.createGain();
-                    
-                    oscillator.connect(gainNode);
-                    gainNode.connect(audioContext.destination);
-                    
-                    oscillator.frequency.setValueAtTime(800, audioContext.currentTime);
-                    oscillator.frequency.exponentialRampToValueAtTime(400, audioContext.currentTime + 0.1);
-                    
-                    gainNode.gain.setValueAtTime(0.1, audioContext.currentTime);
-                    gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.1);
-                    
-                    oscillator.start(audioContext.currentTime);
-                    oscillator.stop(audioContext.currentTime + 0.1);
-                } catch (e) {
-                    // Ігноруємо помилки звуку
-                }
-            };
-            
-            // Додаємо вібрацію для мобільних пристроїв
-            const addHapticFeedback = () => {
-                if (navigator.vibrate) {
-                    navigator.vibrate(50); // 50мс вібрації
-                }
-            };
-            
-            burger && burger.addEventListener('click', function(e) {
-                e.preventDefault();
-                
-                // Додаємо класи для анімації
+            // Проста функція переключення меню
+            burger && burger.addEventListener('click', function() {
                 nav.classList.toggle('nav-active');
                 burger.classList.toggle('active');
-                
-                // Додаємо ефекти
-                playClickSound();
-                addHapticFeedback();
-                
-                // Додаємо ефект пульсації
-                burger.style.animation = 'burgerPulse 0.3s ease-out';
-                setTimeout(() => {
-                    burger.style.animation = '';
-                }, 300);
             });
             
             // Закриваємо меню при кліку на посилання
@@ -1510,9 +1434,6 @@
                     if (nav && nav.classList.contains('nav-active')) {
                         nav.classList.remove('nav-active');
                         burger && burger.classList.remove('active');
-                        
-                        // Додаємо ефекти при закритті
-                        addHapticFeedback();
                     }
                 });
             });
