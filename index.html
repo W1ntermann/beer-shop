@@ -1274,8 +1274,8 @@
         }
         /* Drinks slider styles */
         .drinks-slider { position: relative; overflow: hidden; padding-bottom: 24px; border-radius: 20px; box-shadow: 0 12px 36px rgba(0,0,0,0.28); }
-        .drinks-track { display: flex; transition: transform 600ms cubic-bezier(.22,.61,.36,1); will-change: transform; overflow: hidden; }
-        .drinks-slide { min-width: 100%; position: relative; flex: 0 0 100%; }
+        .drinks-track { display: flex; width: 100%; transition: transform 600ms cubic-bezier(.22,.61,.36,1); will-change: transform; overflow: hidden; }
+        .drinks-slide { min-width: 100%; flex: 0 0 100%; position: relative; }
         .drinks-slide .product-card { margin: 0; background: #FCC300; border: 0; border-radius: 20px; }
         .drinks-slide .product-img { height: 320px; overflow: hidden; }
         .drinks-slide .product-img img { transform: scale(1.02); transition: transform 800ms ease, filter 800ms ease; }
@@ -1291,8 +1291,8 @@
 
         /* Snacks slider styles */
         .snacks-slider { position: relative; overflow: hidden; padding-bottom: 24px; border-radius: 20px; box-shadow: 0 12px 36px rgba(0,0,0,0.28); }
-        .snacks-track { display: flex; transition: transform 600ms cubic-bezier(.22,.61,.36,1); will-change: transform; overflow: hidden; }
-        .snacks-slide { min-width: 100%; position: relative; flex: 0 0 100%; }
+        .snacks-track { display: flex; width: 100%; transition: transform 600ms cubic-bezier(.22,.61,.36,1); will-change: transform; overflow: hidden; }
+        .snacks-slide { min-width: 100%; flex: 0 0 100%; position: relative; }
         .snacks-slide .product-card { margin: 0; background: #FCC300; border: 0; border-radius: 20px; }
         .snacks-slide .product-img { height: 320px; overflow: hidden; }
         .snacks-slide .product-img img { transform: scale(1.02); transition: transform 800ms ease, filter 800ms ease; }
@@ -1496,8 +1496,7 @@
                     dotsWrap.querySelectorAll(`.${dotClass}`).forEach((d,i)=> d.classList.toggle('active', i===index));
                 };
                 const update = () => {
-                    const w = container.clientWidth;
-                    track.style.transform = `translateX(-${index * w}px)`;
+                    track.style.transform = `translateX(-${index * 100}%)`;
                     setActive();
                 };
 
