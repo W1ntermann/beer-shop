@@ -969,11 +969,11 @@
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            width: 32px;
-            height: 32px;
+            width: 28px;
+            height: 28px;
             cursor: pointer;
             z-index: 200;
-            margin-left: 12px;
+            margin-left: 8px;
             position: relative;
             background: transparent;
             border: none;
@@ -986,9 +986,9 @@
         
         .burger span {
             display: block;
-            width: 20px;
-            height: 2.5px;
-            margin: 3px 0;
+            width: 18px;
+            height: 2px;
+            margin: 2.5px 0;
             background: #333333;
             border-radius: 2px;
             transition: all 0.3s ease;
@@ -1026,7 +1026,7 @@
         }
         
         .burger.active span:nth-child(1) {
-            transform: translateY(5.5px) rotate(45deg);
+            transform: translateY(4.5px) rotate(45deg);
         }
         
         .burger.active span:nth-child(2) {
@@ -1034,7 +1034,7 @@
         }
         
         .burger.active span:nth-child(3) {
-            transform: translateY(-5.5px) rotate(-45deg);
+            transform: translateY(-4.5px) rotate(-45deg);
         }
         @media (max-width: 768px) {
             .burger { 
@@ -1045,14 +1045,14 @@
                 top: 0; 
                 right: 0;
                 height: 100vh;
-                width: 260px;
+                width: 240px;
                 background: linear-gradient(135deg, 
                     rgba(26, 26, 26, 0.97) 0%, 
                     rgba(44, 44, 44, 0.95) 100%);
                 flex-direction: column;
                 align-items: center;
                 justify-content: flex-start;
-                padding: 56px 16px 16px 16px;
+                padding: 64px 14px 14px 14px;
                 box-shadow: -6px 0 28px rgba(0,0,0,0.35);
                 transform: translateX(100%);
                 transition: transform 0.3s ease;
@@ -1066,7 +1066,7 @@
                 overscroll-behavior: contain;
             }
             .nav-menu li {
-                margin: 0 0 10px 0;
+                margin: 0 0 6px 0;
                 width: 100%;
             }
             .nav-menu.nav-active {
@@ -1075,9 +1075,9 @@
             .nav-menu a {
                 background: transparent;
                 color: #FCC300;
-                font-size: 16px;
-                padding: 12px 16px;
-                border-radius: 14px;
+                font-size: 14px;
+                padding: 10px 12px;
+                border-radius: 10px;
                 width: 100%;
                 display: block;
                 font-weight: 700;
@@ -1165,26 +1165,8 @@
             }
             
             .nav-menu {
-                width: 240px;
-                padding: 56px 14px 14px 14px;
-                justify-content: flex-start;
-            }
-            
-            .nav-menu li {
-                margin: 0 0 8px 0;
-            }
-            
-            .nav-menu a {
-                font-size: 14px;
-                padding: 10px 14px;
-                border-radius: 10px;
-            }
-        }
-        
-        @media (max-width: 360px) {
-            .nav-menu {
                 width: 220px;
-                padding: 52px 12px 12px 12px;
+                padding: 60px 12px 12px 12px;
                 justify-content: flex-start;
             }
             
@@ -1195,6 +1177,24 @@
             .nav-menu a {
                 font-size: 13px;
                 padding: 9px 12px;
+                border-radius: 9px;
+            }
+        }
+        
+        @media (max-width: 360px) {
+            .nav-menu {
+                width: 200px;
+                padding: 56px 10px 10px 10px;
+                justify-content: flex-start;
+            }
+            
+            .nav-menu li {
+                margin: 0 0 4px 0;
+            }
+            
+            .nav-menu a {
+                font-size: 12px;
+                padding: 8px 10px;
                 border-radius: 8px;
             }
         }
