@@ -986,17 +986,6 @@
             backdrop-filter: blur(10px);
         }
         
-        .burger::before {
-            content: '';
-            position: absolute;
-            inset: -2px;
-            background: linear-gradient(45deg, #FFD700, #FCC300, #FFEB3B, #FFD700);
-            border-radius: 14px;
-            z-index: -1;
-            opacity: 0;
-            transition: opacity 0.3s ease;
-        }
-        
         .burger:hover {
             transform: translateY(-2px) scale(1.05);
             box-shadow: 
@@ -1004,11 +993,6 @@
                 0 4px 12px rgba(0, 0, 0, 0.2),
                 inset 0 1px 0 rgba(255, 255, 255, 0.4);
             background: linear-gradient(145deg, #FFD700 0%, #FFEB3B 50%, #FFF59D 100%);
-        }
-        
-        .burger:hover::before {
-            opacity: 1;
-            animation: borderGlow 2s infinite alternate;
         }
         
         .burger:active {
@@ -1019,31 +1003,20 @@
                 inset 0 2px 4px rgba(0, 0, 0, 0.1);
         }
         
-        @keyframes borderGlow {
-            0% { 
-                background: linear-gradient(45deg, #FFD700, #FCC300, #FFEB3B, #FFD700);
-                background-size: 300% 300%;
-                background-position: 0% 50%;
-            }
-            100% { 
-                background: linear-gradient(45deg, #FFD700, #FCC300, #FFEB3B, #FFD700);
-                background-size: 300% 300%;
-                background-position: 100% 50%;
-            }
-        }
-        
         .burger span {
             display: block;
             width: 28px;
-            height: 3px;
+            height: 3.5px;
             margin: 3px 0;
-            background: linear-gradient(135deg, var(--graphite-dark) 0%, var(--graphite) 50%, var(--graphite-light) 100%);
-            border-radius: 3px;
+            background: linear-gradient(135deg, #1A1A1A 0%, #0F0F0F 50%, #000000 100%);
+            border-radius: 4px;
             transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
             position: relative;
             box-shadow: 
-                0 1px 3px rgba(0, 0, 0, 0.3),
-                inset 0 1px 0 rgba(255, 255, 255, 0.1);
+                0 2px 6px rgba(0, 0, 0, 0.5),
+                inset 0 1px 0 rgba(255, 255, 255, 0.2),
+                inset 0 -1px 0 rgba(0, 0, 0, 0.3);
+            border: 0.5px solid rgba(0, 0, 0, 0.1);
         }
         
         .burger span::before {
@@ -1053,10 +1026,11 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.7), transparent);
             border-radius: 3px;
             transform: translateX(-100%);
             transition: transform 0.6s ease;
+            box-shadow: 0 0 8px rgba(255, 255, 255, 0.3);
         }
         
         .burger:hover span::before {
@@ -1070,25 +1044,6 @@
                 0 2px 8px rgba(0, 0, 0, 0.15),
                 inset 0 1px 0 rgba(255, 255, 255, 0.3);
             transform: rotate(180deg) scale(1.1);
-        }
-        
-        .burger.active::before {
-            background: linear-gradient(45deg, #FF6B6B, #FF8E53, #FF6B9D, #FF6B6B);
-            opacity: 1;
-            animation: borderGlowActive 1.5s infinite alternate;
-        }
-        
-        @keyframes borderGlowActive {
-            0% { 
-                background: linear-gradient(45deg, #FF6B6B, #FF8E53, #FF6B9D, #FF6B6B);
-                background-size: 300% 300%;
-                background-position: 0% 50%;
-            }
-            100% { 
-                background: linear-gradient(45deg, #FF6B6B, #FF8E53, #FF6B9D, #FF6B6B);
-                background-size: 300% 300%;
-                background-position: 100% 50%;
-            }
         }
         
         @keyframes burgerPulse {
@@ -1200,15 +1155,18 @@
         }
         
         .burger.active span {
-            background: linear-gradient(135deg, #FFFFFF 0%, #F5F5F5 50%, #FFFFFF 100%);
+            background: linear-gradient(135deg, #FFFFFF 0%, #F8F8F8 50%, #FFFFFF 100%);
             box-shadow: 
-                0 1px 3px rgba(0, 0, 0, 0.4),
-                inset 0 1px 0 rgba(255, 255, 255, 0.2);
+                0 2px 5px rgba(0, 0, 0, 0.5),
+                inset 0 1px 0 rgba(255, 255, 255, 0.3);
         }
         
         .burger.active span:nth-child(1) {
             transform: translateY(9px) rotate(45deg) scale(1.1);
-            background: linear-gradient(135deg, #FFFFFF 0%, #FFE0E0 50%, #FFFFFF 100%);
+            background: linear-gradient(135deg, #FFFFFF 0%, #F0F0F0 50%, #FFFFFF 100%);
+            box-shadow: 
+                0 2px 6px rgba(0, 0, 0, 0.6),
+                inset 0 1px 0 rgba(255, 255, 255, 0.4);
         }
         
         .burger.active span:nth-child(2) {
@@ -1218,7 +1176,10 @@
         
         .burger.active span:nth-child(3) {
             transform: translateY(-9px) rotate(-45deg) scale(1.1);
-            background: linear-gradient(135deg, #FFFFFF 0%, #FFE0E0 50%, #FFFFFF 100%);
+            background: linear-gradient(135deg, #FFFFFF 0%, #F0F0F0 50%, #FFFFFF 100%);
+            box-shadow: 
+                0 2px 6px rgba(0, 0, 0, 0.6),
+                inset 0 1px 0 rgba(255, 255, 255, 0.4);
         }
         @media (max-width: 768px) {
             .burger { 
