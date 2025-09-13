@@ -1284,7 +1284,7 @@
         .drinks-nav { position: absolute; inset: 0; display: flex; justify-content: space-between; align-items: center; pointer-events:none; padding: 0 8px; }
         .drinks-btn { pointer-events: auto; width: 46px; height: 46px; border-radius: 50%; border: 2px solid #FCC300; background: rgba(26,26,26,0.55); color: #FCC300; display:grid; place-items:center; cursor:pointer; backdrop-filter: blur(6px); transition: transform .2s, background .2s, box-shadow .2s; box-shadow: 0 6px 18px rgba(0,0,0,0.25); }
         .drinks-btn:hover { transform: scale(1.07); background: rgba(26,26,26,0.8); }
-        .drinks-dots { display:flex; gap:10px; justify-content:center; margin-top:14px; }
+        .drinks-dots { display:flex; gap:10px; justify-content:center; margin-top:8px; }
         .drinks-dot { width: 12px; height: 12px; border-radius: 50%; background: rgba(252,195,0,0.35); border:1.5px solid #FCC300; cursor:pointer; transition: transform .2s, background .2s; }
         .drinks-dot:hover { transform: scale(1.15); }
         .drinks-dot.active { background: #FCC300; box-shadow: 0 0 12px rgba(252,195,0,0.6); transform: scale(1.2); }
@@ -1301,7 +1301,12 @@
         .snacks-nav { position: absolute; inset: 0; display: flex; justify-content: space-between; align-items: center; pointer-events:none; padding: 0 8px; }
         .snacks-btn { pointer-events: auto; width: 46px; height: 46px; border-radius: 50%; border: 2px solid #FCC300; background: rgba(26,26,26,0.55); color: #FCC300; display:grid; place-items:center; cursor:pointer; backdrop-filter: blur(6px); transition: transform .2s, background .2s, box-shadow .2s; box-shadow: 0 6px 18px rgba(0,0,0,0.25); }
         .snacks-btn:hover { transform: scale(1.07); background: rgba(26,26,26,0.8); }
-        .snacks-dots { display:flex; gap:10px; justify-content:center; margin-top:14px; }
+        .snacks-dots { display:flex; gap:10px; justify-content:center; margin-top:8px; }
+
+        /* Reduce vertical spacing for these sections to match other sliders */
+        #drinks { padding-bottom: 40px; }
+        #snacks { padding-bottom: 40px; }
+        #drinks .drinks-slider, #snacks .snacks-slider { margin-bottom: 6px; }
         .snacks-dot { width: 12px; height: 12px; border-radius: 50%; background: rgba(252,195,0,0.35); border:1.5px solid #FCC300; cursor:pointer; transition: transform .2s, background .2s; }
         .snacks-dot:hover { transform: scale(1.15); }
         .snacks-dot.active { background: #FCC300; box-shadow: 0 0 12px rgba(252,195,0,0.6); transform: scale(1.2); }
