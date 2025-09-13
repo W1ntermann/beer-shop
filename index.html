@@ -1493,7 +1493,7 @@
                         drinksSlides.forEach((s,i)=> s.classList.toggle('active', i===dIndex));
                         drinksDots.querySelectorAll('.drinks-dot').forEach((d,i)=> d.classList.toggle('active', i===dIndex));
                     };
-                    const dUpdate = ()=>{ drinksTrack.style.transform = `translateX(-${dIndex*100}%)`; dSetActive(); };
+                    const dUpdate = ()=>{ const w = drinksContainer.clientWidth; drinksTrack.style.transform = `translateX(-${dIndex*w}px)`; dSetActive(); };
                     
                     drinksDots.querySelectorAll('.drinks-dot').forEach((dot, i) => {
                         dot.addEventListener('click', () => { dIndex = i; dUpdate(); });
@@ -1521,7 +1521,7 @@
                         snacksSlides.forEach((s,i)=> s.classList.toggle('active', i===snIndex));
                         snacksDots.querySelectorAll('.snacks-dot').forEach((d,i)=> d.classList.toggle('active', i===snIndex));
                     };
-                    const snUpdate = ()=>{ snacksTrack.style.transform = `translateX(-${snIndex*100}%)`; snSetActive(); };
+                    const snUpdate = ()=>{ const w = snacksContainer.clientWidth; snacksTrack.style.transform = `translateX(-${snIndex*w}px)`; snSetActive(); };
                     
                     snacksDots.querySelectorAll('.snacks-dot').forEach((dot, i) => {
                         dot.addEventListener('click', () => { snIndex = i; snUpdate(); });
