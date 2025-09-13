@@ -981,7 +981,7 @@
                 0 6px 20px rgba(252, 195, 0, 0.4),
                 0 2px 8px rgba(0, 0, 0, 0.15),
                 inset 0 1px 0 rgba(255, 255, 255, 0.3);
-            border: 2px solid rgba(255, 255, 255, 0.2);
+            border: none;
             transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
             backdrop-filter: blur(10px);
         }
@@ -1169,25 +1169,35 @@
             }
         }
         
-        /* Анімація пунктів меню */
-        .nav-menu li {
-            opacity: 0;
-            transform: translateX(50px);
-            transition: all 0.3s ease;
+        /* Анімація пунктів меню - тільки для мобільних */
+        @media (max-width: 768px) {
+            .nav-menu li {
+                opacity: 0;
+                transform: translateX(50px);
+                transition: all 0.3s ease;
+            }
+            
+            .nav-menu.nav-active li {
+                opacity: 1;
+                transform: translateX(0);
+            }
+            
+            .nav-menu.nav-active li:nth-child(1) { transition-delay: 0.1s; }
+            .nav-menu.nav-active li:nth-child(2) { transition-delay: 0.15s; }
+            .nav-menu.nav-active li:nth-child(3) { transition-delay: 0.2s; }
+            .nav-menu.nav-active li:nth-child(4) { transition-delay: 0.25s; }
+            .nav-menu.nav-active li:nth-child(5) { transition-delay: 0.3s; }
+            .nav-menu.nav-active li:nth-child(6) { transition-delay: 0.35s; }
+            .nav-menu.nav-active li:nth-child(7) { transition-delay: 0.4s; }
         }
         
-        .nav-menu.nav-active li {
-            opacity: 1;
-            transform: translateX(0);
+        /* Для десктопа - завжди видимі */
+        @media (min-width: 769px) {
+            .nav-menu li {
+                opacity: 1 !important;
+                transform: none !important;
+            }
         }
-        
-        .nav-menu.nav-active li:nth-child(1) { transition-delay: 0.1s; }
-        .nav-menu.nav-active li:nth-child(2) { transition-delay: 0.15s; }
-        .nav-menu.nav-active li:nth-child(3) { transition-delay: 0.2s; }
-        .nav-menu.nav-active li:nth-child(4) { transition-delay: 0.25s; }
-        .nav-menu.nav-active li:nth-child(5) { transition-delay: 0.3s; }
-        .nav-menu.nav-active li:nth-child(6) { transition-delay: 0.35s; }
-        .nav-menu.nav-active li:nth-child(7) { transition-delay: 0.4s; }
         
         .burger.active span {
             background: linear-gradient(135deg, #FFFFFF 0%, #F5F5F5 50%, #FFFFFF 100%);
@@ -1230,6 +1240,7 @@
                 z-index: 150;
                 display: flex;
                 gap: 0;
+                border-left: 3px solid #FCC300;
             }
             .nav-menu li {
                 margin: 0 0 24px 0;
