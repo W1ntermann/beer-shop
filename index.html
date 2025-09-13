@@ -851,7 +851,6 @@
             .section-title h2 { font-size: 30px; }
         }
         @media (max-width: 768px) {
-            .nav-menu { display: none; }
             .hero-logo { 
                 max-width: 350px; 
                 margin-bottom: 20px;
@@ -1211,7 +1210,7 @@
             transform: translateY(-9px) rotate(-45deg) scale(1.1);
             background: linear-gradient(135deg, #FFFFFF 0%, #FFE0E0 50%, #FFFFFF 100%);
         }
-        @media (max-width: 1024px) {
+        @media (max-width: 768px) {
             .burger { 
                 display: flex; 
             }
@@ -1254,6 +1253,52 @@
                 display: none;
             }
         }
+        /* Десктопна навігація - завжди видима на великих екранах */
+        @media (min-width: 769px) {
+            .burger {
+                display: none !important;
+            }
+            
+            .nav-menu {
+                display: flex !important;
+                position: static !important;
+                flex-direction: row !important;
+                background: none !important;
+                height: auto !important;
+                width: auto !important;
+                transform: none !important;
+                box-shadow: none !important;
+                padding: 0 !important;
+                backdrop-filter: none !important;
+                border: none !important;
+            }
+            
+            .nav-menu li {
+                margin: 0 0 0 25px !important;
+                width: auto !important;
+                opacity: 1 !important;
+                transform: none !important;
+            }
+            
+            .nav-menu a {
+                background: linear-gradient(135deg, var(--graphite-dark) 0%, var(--graphite) 50%, var(--graphite-light) 100%) !important;
+                color: var(--yellow) !important;
+                font-weight: 600 !important;
+                font-size: 16px !important;
+                padding: 8px 16px !important;
+                border-radius: 8px !important;
+                border: 1px solid var(--graphite-medium) !important;
+                box-shadow: 0 2px 4px rgba(0,0,0,0.2) !important;
+                text-align: left !important;
+                width: auto !important;
+                display: inline-block !important;
+            }
+            
+            .nav-menu a:after {
+                display: block !important;
+            }
+        }
+        
         /* Покращення для мобільних пристроїв */
         @media (max-width: 768px) {
             .burger {
