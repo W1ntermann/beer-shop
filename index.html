@@ -1338,6 +1338,15 @@
         /* Disable underline under section titles */
         .section-title::after { content: none !important; display: none !important; height: 0 !important; }
         
+        /* Remove text shadows in content sections */
+        #stores h2, #stores h3,
+        #beer h2, #beer h3,
+        #drinks h2, #drinks h3,
+        #snacks h2, #snacks h3,
+        #stores p, #beer p, #drinks p, #snacks p {
+            text-shadow: none !important;
+        }
+        
         /* Mobile logo and burger menu fixes */
         @media (max-width: 1024px) {
             .burger { display: flex; }
