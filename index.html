@@ -1055,7 +1055,7 @@
             }
         }
         
-        .burger.active span:nch-child(1) {
+        .burger.active span:nth-child(1) {
             transform: translateY(4.5px) rotate(45deg);
         }
         
@@ -1273,36 +1273,27 @@
         @media (max-width: 768px) {
             .beer-slide .product-img, .stores-slider .store-img { max-height: 220px; }
         }
-        /* Drinks slider styles */
-        .drinks-slider { position: relative; overflow: hidden; padding-bottom: 24px; border-radius: 20px; box-shadow: 0 12px 36px rgba(0,0,0,0.28); }
-        .drinks-track { display: flex; transition: transform 600ms cubic-bezier(.22,.61,.36,1); will-change: transform; overflow: hidden; }
-        .drinks-slide { min-width: 100%; flex: 0 0 100%; position: relative; }
-        .drinks-slide .product-card { margin: 0; background: #FCC300; border: 0; border-radius: 20px; }
-        .drinks-slide .product-img { height: 320px; overflow: hidden; }
-        .drinks-slide .product-img img { transform: scale(1.02); transition: transform 800ms ease, filter 800ms ease; }
-        .drinks-slide.active .product-img img { transform: scale(1.08); filter: saturate(1.1); }
-        .drinks-gradient { position:absolute; inset:0; background: linear-gradient(180deg, rgba(0,0,0,0.0) 55%, rgba(26,26,26,0.35) 100%); pointer-events:none; border-radius: 20px; }
-        .drinks-nav { position: absolute; left:0; right:0; top:0; bottom:26px; display: flex; justify-content: space-between; align-items: center; pointer-events:none; padding: 0 8px; }
-        .drinks-btn { pointer-events: auto; width: 46px; height: 46px; border-radius: 50%; border: 2px solid #FCC300; background: rgba(26,26,26,0.55); color: #FCC300; display:grid; place-items:center; cursor:pointer; backdrop-filter: blur(6px); transition: transform .2s, background .2s, box-shadow .2s; box-shadow: 0 6px 18px rgba(0,0,0,0.25); }
-        .drinks-btn:hover { transform: scale(1.07); background: rgba(26,26,26,0.8); }
-        .drinks-dots { display:flex; gap:10px; justify-content:center; margin-top: 12px; }
-        .drinks-dot { width: 12px; height: 12px; border-radius: 50%; background: rgba(252,195,0,0.35); border:1.5px solid #FCC300; cursor:pointer; transition: transform .2s, background .2s; }
-        .drinks-dot:hover { transform: scale(1.15); }
-        .drinks-dot.active { background: #FCC300; box-shadow: 0 0 12px rgba(252,195,0,0.6); transform: scale(1.2); }
+        /* Drinks slider styles (match beer/stores) */
+        .drinks-slider { position: relative; overflow: hidden; border-radius: 20px; box-shadow: 0 12px 36px rgba(0,0,0,0.28); }
+        .drinks-track { display: flex; transition: transform 600ms cubic-bezier(.22,.61,.36,1); will-change: transform; }
+        .drinks-slider .beer-slide { min-width: 100%; position: relative; }
+        .drinks-slider .product-card { margin: 0; background: #FCC300; border: 0; border-radius: 20px; }
+        .drinks-slider .product-img { height: 320px; }
+        .drinks-slider .product-img img { width:100%; height:100%; object-fit:cover; transform: scale(1.02); transition: transform 800ms ease, filter 800ms ease; }
+        .drinks-slider .beer-slide.active .product-img img { transform: scale(1.08); filter: saturate(1.1); }
+        #drinks .beer-dots { display:flex; gap:10px; justify-content:center; margin-top:14px; }
+        #drinks .beer-dot { width: 12px; height: 12px; border-radius: 50%; background: rgba(255,215,0,0.35); border:1.5px solid var(--yellow); cursor:pointer; transition: transform .2s, background .2s; }
+        #drinks .beer-dot:hover { transform: scale(1.15); }
+        #drinks .beer-dot.active { background: var(--yellow); }
 
-        /* Snacks slider styles */
-        .snacks-slider { position: relative; overflow: hidden; padding-bottom: 24px; border-radius: 20px; box-shadow: 0 12px 36px rgba(0,0,0,0.28); }
-        .snacks-track { display: flex; transition: transform 600ms cubic-bezier(.22,.61,.36,1); will-change: transform; overflow: hidden; }
-        .snacks-slide { min-width: 100%; flex: 0 0 100%; position: relative; }
-        .snacks-slide .product-card { margin: 0; background: #FCC300; border: 0; border-radius: 20px; }
-        .snacks-slide .product-img { height: 320px; overflow: hidden; }
-        .snacks-slide .product-img img { transform: scale(1.02); transition: transform 800ms ease, filter 800ms ease; }
-        .snacks-slide.active .product-img img { transform: scale(1.08); filter: saturate(1.1); }
-        .snacks-gradient { position:absolute; inset:0; background: linear-gradient(180deg, rgba(0,0,0,0.0) 55%, rgba(26,26,26,0.35) 100%); pointer-events:none; border-radius: 20px; }
-        .snacks-nav { position: absolute; left:0; right:0; top:0; bottom:26px; display: flex; justify-content: space-between; align-items: center; pointer-events:none; padding: 0 8px; }
-        .snacks-btn { pointer-events: auto; width: 46px; height: 46px; border-radius: 50%; border: 2px solid #FCC300; background: rgba(26,26,26,0.55); color: #FCC300; display:grid; place-items:center; cursor:pointer; backdrop-filter: blur(6px); transition: transform .2s, background .2s, box-shadow .2s; box-shadow: 0 6px 18px rgba(0,0,0,0.25); }
-        .snacks-btn:hover { transform: scale(1.07); background: rgba(26,26,26,0.8); }
-        .snacks-dots { display:flex; gap:10px; justify-content:center; margin-top: 12px; }
+        /* Snacks slider styles (match beer/stores) */
+        .snacks-slider { position: relative; overflow: hidden; border-radius: 20px; box-shadow: 0 12px 36px rgba(0,0,0,0.28); }
+        .snacks-track { display: flex; transition: transform 600ms cubic-bezier(.22,.61,.36,1); will-change: transform; }
+        .snacks-slider .beer-slide { min-width: 100%; position: relative; }
+        .snacks-slider .product-card { margin: 0; background: #FCC300; border: 0; border-radius: 20px; }
+        .snacks-slider .product-img { height: 320px; }
+        .snacks-slider .product-img img { width:100%; height:100%; object-fit:cover; transform: scale(1.02); transition: transform 800ms ease, filter 800ms ease; }
+        .snacks-slider .beer-slide.active .product-img img { transform: scale(1.08); filter: saturate(1.1); }
 
         /* Reduce vertical spacing for these sections to match other sliders */
         #drinks { padding-bottom: 40px; }
@@ -1546,9 +1537,9 @@
             <div class="section-title">
                 <h2>Інші напої</h2>
             </div>
-            <div class="drinks-slider">
-                <div class="drinks-track">
-                    <div class="drinks-slide active">
+            <div class="beer-slider drinks-slider">
+                <div class="beer-track drinks-track">
+                    <div class="beer-slide">
                         <div class="product-card">
                             <div class="product-img">
                                 <img src="https://images.unsplash.com/photo-1506377247377-2a5b3b417ebb?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Вино">
@@ -1560,7 +1551,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="drinks-slide">
+                    <div class="beer-slide">
                         <div class="product-card">
                             <div class="product-img">
                                 <img src="https://images.unsplash.com/photo-1571934811356-5cc061b6821f?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Сидр">
@@ -1572,7 +1563,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="drinks-slide">
+                    <div class="beer-slide">
                         <div class="product-card">
                             <div class="product-img">
                                 <img src="https://images.unsplash.com/photo-1544145945-f90425340c7e?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Безалкогольні напої">
@@ -1585,16 +1576,12 @@
                         </div>
                     </div>
                 </div>
-                <div class="drinks-nav">
-                    <button class="drinks-btn drinks-prev">❮</button>
-                    <button class="drinks-btn drinks-next">❯</button>
-                </div>
-                <div class="drinks-dots">
-                    <span class="drinks-dot active" data-slide="0"></span>
-                    <span class="drinks-dot" data-slide="1"></span>
-                    <span class="drinks-dot" data-slide="2"></span>
+                <div class="beer-nav">
+                    <button class="beer-btn" id="drinksPrev" aria-label="Попередній">‹</button>
+                    <button class="beer-btn" id="drinksNext" aria-label="Наступний">›</button>
                 </div>
             </div>
+            <div class="beer-dots" id="drinksDots"></div>
         </div>
     </section>
 
@@ -1604,12 +1591,12 @@
             <div class="section-title">
                 <h2>Закуски</h2>
             </div>
-            <div class="snacks-slider">
-                <div class="snacks-track">
-                    <div class="snacks-slide active">
+            <div class="beer-slider snacks-slider">
+                <div class="beer-track snacks-track">
+                    <div class="beer-slide">
                         <div class="product-card">
                             <div class="product-img">
-                                <img src="" alt="Чипси та снеки">
+                                <img src="https://images.unsplash.com/photo-1566478989037-eec170784d0b?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Чипси та снеки">
                             </div>
                             <div class="snacks-gradient"></div>
                             <div class="product-info">
@@ -1618,10 +1605,10 @@
                             </div>
                         </div>
                     </div>
-                    <div class="snacks-slide">
+                    <div class="beer-slide">
                         <div class="product-card">
                             <div class="product-img">
-                                <img src="" alt="М'ясні страви">s
+                                <img src="https://images.unsplash.com/photo-1529692236671-f1f6cf9683ba?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="М'ясні страви">
                             </div>
                             <div class="snacks-gradient"></div>
                             <div class="product-info">
@@ -1630,7 +1617,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="snacks-slide">
+                    <div class="beer-slide">
                         <div class="product-card">
                             <div class="product-img">
                                 <img src="https://images.unsplash.com/photo-1486297678162-eb2a19b0a32d?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Сирна тарілка">
@@ -1643,16 +1630,12 @@
                         </div>
                     </div>
                 </div>
-                <div class="snacks-nav">
-                    <button class="snacks-btn snacks-prev">❮</button>
-                    <button class="snacks-btn snacks-next">❯</button>
-                </div>
-                <div class="snacks-dots">
-                    <span class="snacks-dot active" data-slide="0"></span>
-                    <span class="snacks-dot" data-slide="1"></span>
-                    <span class="snacks-dot" data-slide="2"></span>
+                <div class="beer-nav">
+                    <button class="beer-btn" id="snacksPrev" aria-label="Попередній">‹</button>
+                    <button class="beer-btn" id="snacksNext" aria-label="Наступний">›</button>
                 </div>
             </div>
+            <div class="beer-dots" id="snacksDots"></div>
         </div>
     </section>
 
@@ -1833,111 +1816,67 @@
                 }
             }
 
-            // Drinks slider initialization
-            const drinksContainer = document.querySelector('.drinks-slider');
-            if (drinksContainer) {
-                const drinksTrack = drinksContainer.querySelector('.drinks-track');
-                const drinksSlides = Array.from(drinksContainer.querySelectorAll('.drinks-slide'));
-                const drinksPrev = drinksContainer.querySelector('.drinks-prev');
-                const drinksNext = drinksContainer.querySelector('.drinks-next');
-                const drinksDots = drinksContainer.querySelector('.drinks-dots');
-                
-                if (drinksTrack && drinksSlides.length) {
-                    let dIndex = 0;
-                    
-                    const setActiveDrinks = () => {
-                        drinksSlides.forEach((s, i) => s.classList.toggle('active', i === dIndex));
-                        if (drinksDots) {
-                            drinksDots.querySelectorAll('.drinks-dot').forEach((d, i) => d.classList.toggle('active', i === dIndex));
-                        }
-                    };
-                    
-                    const updateDrinks = () => {
-                        drinksTrack.style.transform = `translateX(-${dIndex * 100}%)`;
-                        setActiveDrinks();
-                    };
-                    
-                    // Initialize dots if they exist
-                    if (drinksDots) {
-                        drinksDots.querySelectorAll('.drinks-dot').forEach((dot, i) => {
-                            dot.addEventListener('click', () => { 
-                                dIndex = i; 
-                                updateDrinks(); 
-                            });
+            // Drinks slider (click-only, same as beer/stores)
+            {
+                const container = document.querySelector('.drinks-slider');
+                if (container) {
+                    const track = container.querySelector('.drinks-track');
+                    const slides = Array.from(container.querySelectorAll('.beer-slide'));
+                    const prev = document.getElementById('drinksPrev');
+                    const next = document.getElementById('drinksNext');
+                    const dotsWrap = document.getElementById('drinksDots');
+                    if (track && slides.length && dotsWrap) {
+                        let index = 0;
+                        const setActive = () => {
+                            slides.forEach((s,i)=> s.classList.toggle('active', i===index));
+                            dotsWrap.querySelectorAll('.beer-dot').forEach((d,i)=> d.classList.toggle('active', i===index));
+                        };
+                        const update = () => { track.style.transform = `translateX(-${index*100}%)`; setActive(); };
+                        dotsWrap.innerHTML = '';
+                        slides.forEach((_, i)=>{
+                            const dot = document.createElement('button');
+                            dot.className = 'beer-dot' + (i===0?' active':'');
+                            dot.addEventListener('click', ()=>{ index = i; update(); });
+                            dotsWrap.appendChild(dot);
                         });
+                        const goPrev = ()=>{ index = (index - 1 + slides.length) % slides.length; update(); };
+                        const goNext = ()=>{ index = (index + 1) % slides.length; update(); };
+                        prev && prev.addEventListener('click', goPrev);
+                        next && next.addEventListener('click', goNext);
+                        setActive();
                     }
-                    
-                    // Navigation buttons
-                    if (drinksPrev) {
-                        drinksPrev.addEventListener('click', () => {
-                            dIndex = (dIndex - 1 + drinksSlides.length) % drinksSlides.length;
-                            updateDrinks();
-                        });
-                    }
-                    
-                    if (drinksNext) {
-                        drinksNext.addEventListener('click', () => {
-                            dIndex = (dIndex + 1) % drinksSlides.length;
-                            updateDrinks();
-                        });
-                    }
-                    
-                    // Initialize
-                    updateDrinks();
                 }
             }
 
-            // Snacks slider initialization
-            const snacksContainer = document.querySelector('.snacks-slider');
-            if (snacksContainer) {
-                const snacksTrack = snacksContainer.querySelector('.snacks-track');
-                const snacksSlides = Array.from(snacksContainer.querySelectorAll('.snacks-slide'));
-                const snacksPrev = snacksContainer.querySelector('.snacks-prev');
-                const snacksNext = snacksContainer.querySelector('.snacks-next');
-                const snacksDots = snacksContainer.querySelector('.snacks-dots');
-                
-                if (snacksTrack && snacksSlides.length) {
-                    let sIndex = 0;
-                    
-                    const setActiveSnacks = () => {
-                        snacksSlides.forEach((s, i) => s.classList.toggle('active', i === sIndex));
-                        if (snacksDots) {
-                            snacksDots.querySelectorAll('.snacks-dot').forEach((d, i) => d.classList.toggle('active', i === sIndex));
-                        }
-                    };
-                    
-                    const updateSnacks = () => {
-                        snacksTrack.style.transform = `translateX(-${sIndex * 100}%)`;
-                        setActiveSnacks();
-                    };
-                    
-                    // Initialize dots if they exist
-                    if (snacksDots) {
-                        snacksDots.querySelectorAll('.snacks-dot').forEach((dot, i) => {
-                            dot.addEventListener('click', () => { 
-                                sIndex = i; 
-                                updateSnacks(); 
-                            });
+            // Snacks slider (click-only, same as beer/stores)
+            {
+                const container = document.querySelector('.snacks-slider');
+                if (container) {
+                    const track = container.querySelector('.snacks-track');
+                    const slides = Array.from(container.querySelectorAll('.beer-slide'));
+                    const prev = document.getElementById('snacksPrev');
+                    const next = document.getElementById('snacksNext');
+                    const dotsWrap = document.getElementById('snacksDots');
+                    if (track && slides.length && dotsWrap) {
+                        let index = 0;
+                        const setActive = () => {
+                            slides.forEach((s,i)=> s.classList.toggle('active', i===index));
+                            dotsWrap.querySelectorAll('.beer-dot').forEach((d,i)=> d.classList.toggle('active', i===index));
+                        };
+                        const update = () => { track.style.transform = `translateX(-${index*100}%)`; setActive(); };
+                        dotsWrap.innerHTML = '';
+                        slides.forEach((_, i)=>{
+                            const dot = document.createElement('button');
+                            dot.className = 'beer-dot' + (i===0?' active':'');
+                            dot.addEventListener('click', ()=>{ index = i; update(); });
+                            dotsWrap.appendChild(dot);
                         });
+                        const goPrev = ()=>{ index = (index - 1 + slides.length) % slides.length; update(); };
+                        const goNext = ()=>{ index = (index + 1) % slides.length; update(); };
+                        prev && prev.addEventListener('click', goPrev);
+                        next && next.addEventListener('click', goNext);
+                        setActive();
                     }
-                    
-                    // Navigation buttons
-                    if (snacksPrev) {
-                        snacksPrev.addEventListener('click', () => {
-                            sIndex = (sIndex - 1 + snacksSlides.length) % snacksSlides.length;
-                            updateSnacks();
-                        });
-                    }
-                    
-                    if (snacksNext) {
-                        snacksNext.addEventListener('click', () => {
-                            sIndex = (sIndex + 1) % snacksSlides.length;
-                            updateSnacks();
-                        });
-                    }
-                    
-                    // Initialize
-                    updateSnacks();
                 }
             }
         });
