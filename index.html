@@ -1251,7 +1251,7 @@
             padding-left: 6px;
         }
         /* Beer slider - enhanced */
-        .beer-slider { position: relative; overflow: hidden; border-radius: 20px; box-shadow: 0 12px 36px rgba(0,0,0,0.28); }
+        .beer-slider { position: relative; overflow: hidden; border-radius: 20px; box-shadow: 0 12px 36px rgba(0,0,0,0.28); max-width: 800px; margin: 0 auto; }
         .beer-track { display: flex; transition: transform 600ms cubic-bezier(.22,.61,.36,1); will-change: transform; }
         .beer-slide { min-width: 100%; position: relative; }
         .beer-slide .product-card { margin: 0; background: #FCC300; border: 0; border-radius: 20px; }
@@ -1283,10 +1283,10 @@
         .beer-slide .product-img { aspect-ratio: 16/9; max-height: none; }
         /* Desktop-specific sizing for professional image fit */
         @media (min-width: 769px) and (max-width: 1023px) {
-            #beer { --beer-img-h: 240px; }
+            #beer { --beer-img-h: 200px; }
         }
         @media (min-width: 1024px) {
-            #beer { --beer-img-h: 280px; }
+            #beer { --beer-img-h: 220px; }
         }
         .stores-slider .store-img { aspect-ratio: 16/9; height: auto; max-height: 420px; }
         @media (max-width: 1024px) {
