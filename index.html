@@ -1281,6 +1281,15 @@
         }
         /* Organic image sizing for sliders */
         .beer-slide .product-img { aspect-ratio: auto; height: auto; max-height: none; }
+        /* Desktop-specific sizing for professional image fit */
+        @media (min-width: 769px) and (max-width: 1023px) {
+            #beer .beer-slide .product-img { height: 360px; }
+            #beer .beer-slide .product-img img { object-fit: cover; object-position: center; }
+        }
+        @media (min-width: 1024px) {
+            #beer .beer-slide .product-img { height: 440px; }
+            #beer .beer-slide .product-img img { object-fit: cover; object-position: center; }
+        }
         .stores-slider .store-img { aspect-ratio: 16/9; height: auto; max-height: 420px; }
         @media (max-width: 1024px) {
             .beer-slide .product-img, .stores-slider .store-img { max-height: 300px; }
