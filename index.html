@@ -1280,17 +1280,17 @@
         }
         .stores-slider .store-img { aspect-ratio: 16/9; height: auto; max-height: 420px; }
         @media (max-width: 1024px) {
-            .beer-slide .product-img, .stores-slider .store-img { max-height: 300px; }
+            .beer-slide .product-img, .stores-slider .store-img, .drinks-slider .product-img, .snacks-slider .product-img { max-height: 300px; }
         }
         @media (max-width: 768px) {
-            .beer-slide .product-img, .stores-slider .store-img { max-height: 220px; }
+            .beer-slide .product-img, .stores-slider .store-img, .drinks-slider .product-img, .snacks-slider .product-img { max-height: 220px; }
         }
         /* Drinks slider styles (match beer/stores) */
         .drinks-slider { position: relative; overflow: hidden; border-radius: 20px; box-shadow: 0 12px 36px rgba(0,0,0,0.28); }
         .drinks-track { display: flex; transition: transform 600ms cubic-bezier(.22,.61,.36,1); will-change: transform; }
         .drinks-slider .beer-slide { min-width: 100%; position: relative; }
         .drinks-slider .product-card { margin: 0; background: #FCC300; border: 0; border-radius: 20px; }
-        .drinks-slider .product-img { height: 320px; }
+        .drinks-slider .product-img { aspect-ratio: 16/9; height: auto; max-height: 420px; }
         .drinks-slider .product-img img { width:100%; height:100%; object-fit:cover; object-position:center; transform: none; transition: transform 800ms ease, filter 800ms ease; }
         .drinks-slider .beer-slide.active .product-img img { transform: none; filter: saturate(1.1); }
         .drinks-slider .product-card:hover .product-img img { transform: none; }
@@ -1304,7 +1304,7 @@
         .snacks-track { display: flex; transition: transform 600ms cubic-bezier(.22,.61,.36,1); will-change: transform; }
         .snacks-slider .beer-slide { min-width: 100%; position: relative; }
         .snacks-slider .product-card { margin: 0; background: #FCC300; border: 0; border-radius: 20px; }
-        .snacks-slider .product-img { height: 320px; }
+        .snacks-slider .product-img { aspect-ratio: 16/9; height: auto; max-height: 420px; }
         .snacks-slider .product-img img { width:100%; height:100%; object-fit:cover; object-position:center; transform: none; transition: transform 800ms ease, filter 800ms ease; }
         .snacks-slider .beer-slide.active .product-img img { transform: none; filter: saturate(1.1); }
         .snacks-slider .product-card:hover .product-img img { transform: none; }
