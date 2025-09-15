@@ -1255,7 +1255,7 @@
         .beer-track { display: flex; transition: transform 600ms cubic-bezier(.22,.61,.36,1); will-change: transform; }
         .beer-slide { min-width: 100%; position: relative; }
         .beer-slide .product-card { margin: 0; background: #FCC300; border: 0; border-radius: 20px; }
-        .beer-slide .product-img { height: var(--beer-img-h, 320px); }
+        .beer-slide .product-img { aspect-ratio: 16/9; height: auto; max-height: 420px; }
         .beer-slide .product-img img {
             width: 100%;
             height: 100%;
@@ -1268,7 +1268,7 @@
         .beer-slide.active .product-img img { transform: none; filter: saturate(1.1); }
         .beer-slide .product-card:hover .product-img img { transform: none; }
         .beer-gradient { position:absolute; inset:0; background: linear-gradient(180deg, rgba(0,0,0,0.0) 55%, rgba(26,26,26,0.35) 100%); pointer-events:none; border-radius: 20px; }
-        .beer-nav { position: absolute; top: 0; left: 0; right: 0; height: var(--beer-img-h, 320px); display: flex; justify-content: space-between; align-items: center; pointer-events:none; padding: 0 8px; }
+        .beer-nav { position: absolute; inset: 0; display: flex; justify-content: space-between; align-items: center; pointer-events:none; padding: 0 8px; }
         .beer-btn { pointer-events: auto; width: 46px; height: 46px; border-radius: 50%; border: 2px solid var(--yellow); background: rgba(26,26,26,0.55); color: var(--yellow); display:grid; place-items:center; cursor:pointer; backdrop-filter: blur(6px); transition: transform .2s, background .2s, box-shadow .2s; box-shadow: 0 6px 18px rgba(0,0,0,0.25); }
         .beer-btn:hover { transform: scale(1.07); background: rgba(26,26,26,0.8); }
         .beer-dots { display:flex; gap:10px; justify-content:center; margin-top:14px; }
@@ -1276,17 +1276,7 @@
         .beer-dot:hover { transform: scale(1.15); }
         .beer-dot.active { background: var(--yellow); }
         @media (max-width: 768px) {
-            #beer { --beer-img-h: 220px; }
             .beer-btn { width: 40px; height: 40px; }
-        }
-        /* Organic image sizing for sliders */
-        .beer-slide .product-img { aspect-ratio: 16/9; max-height: none; }
-        /* Desktop-specific sizing for professional image fit */
-        @media (min-width: 769px) and (max-width: 1023px) {
-            #beer { --beer-img-h: 120px; }
-        }
-        @media (min-width: 1024px) {
-            #beer { --beer-img-h: 140px; }
         }
         .stores-slider .store-img { aspect-ratio: 16/9; height: auto; max-height: 420px; }
         @media (max-width: 1024px) {
