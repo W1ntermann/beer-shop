@@ -1255,11 +1255,12 @@
         .beer-track { display: flex; transition: transform 600ms cubic-bezier(.22,.61,.36,1); will-change: transform; }
         .beer-slide { min-width: 100%; position: relative; }
         .beer-slide .product-card { margin: 0; background: #FCC300; border: 0; border-radius: 20px; }
-        .beer-slide .product-img { height: 320px; }
+        .beer-slide .product-img { height: auto; }
         .beer-slide .product-img img {
             width: 100%;
-            height: 100%;
-            object-fit: cover;
+            height: auto;
+            display: block;
+            object-fit: contain;
             object-position: center;
             transform: none;
             transition: transform 800ms ease, filter 800ms ease;
@@ -1275,11 +1276,11 @@
         .beer-dot:hover { transform: scale(1.15); }
         .beer-dot.active { background: var(--yellow); }
         @media (max-width: 768px) {
-            .beer-slide .product-img { height: 220px; }
+            .beer-slide .product-img { height: auto; }
             .beer-btn { width: 40px; height: 40px; }
         }
         /* Organic image sizing for sliders */
-        .beer-slide .product-img { aspect-ratio: 16/9; height: auto; max-height: 420px; }
+        .beer-slide .product-img { aspect-ratio: auto; height: auto; max-height: none; }
         .stores-slider .store-img { aspect-ratio: 16/9; height: auto; max-height: 420px; }
         @media (max-width: 1024px) {
             .beer-slide .product-img, .stores-slider .store-img { max-height: 300px; }
